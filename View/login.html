@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja de Cupcakes</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="./assets/favicon.png" type="image/x-icon">
+</head>
+<body id="Login">
+
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="./assets/logo.png" alt="Logo" />
+            </div>
+            <ul class="menu">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="pedidos.html">Pedidos</a></li>
+                <li><a href="combos.html">Combos</a></li>
+                <li><a href="criarCupcake.html">Crie seu Cupcake</a></li>
+                <li><a href="carrinho.html">Carrinho</a></li>
+                <li><a href="contato.html">Contato</a></li>
+                <li><a href="beneficios.html">Benefícios</a></li>
+            </ul>
+            <div class="account-area">
+                <div class="cart-icon">
+                    <img src="cart-icon.png" alt="" />
+                </div>
+                <a href="#" class="login-link">Entrar/Criar conta</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="auth-container">
+        <!-- Bloco de Registro -->
+        <div class="register-block">
+            <h2>Registre-se</h2>
+            <button class="google-register">Registre-se com o Google</button>
+            <p>ou</p>
+
+            <form action="#" method="post" class="register-form">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="password">Senha</label>
+                <small style="float: right" class="password-note">A senha necessita: letra minúscula, maiúscula e número.</small>
+                <input type="password" id="password" name="password" required>
+                <label for="confirm-password">Confirmar Senha</label>
+                <input type="password" id="confirm-password" name="confirm-password" required>
+
+                <div class="name-group">
+                    <div>
+                        <label for="first-name">Primeiro Nome</label>
+                        <input type="text" id="first-name" name="first-name" required>
+                    </div>
+                    <div>
+                        <label for="last-name">Sobrenome</label>
+                        <input type="text" id="last-name" name="last-name" required>
+                    </div>
+                </div>
+
+                <div class="phone-input">
+                    <label for="phone">Número de Celular</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+
+                <div class="diet-group">
+                    <label>Possui restrições alimentares?</label>
+                    <div class="radio-group">
+                        <input type="radio" id="diet-yes" name="diet" value="sim">
+                        <label for="diet-yes">Sim</label>
+                        <input type="radio" id="diet-no" name="diet" value="não">
+                        <label for="diet-no">Não</label>
+                    </div>
+
+                </div>
+
+                <label for="options">Quais restrições ?</label>
+                <select id="options" name="options">
+                    <option value="op1">Não possuo restrições alimentares</option>
+                    <option value="op2">Glúten</option>
+                    <option value="op2">Etc</option>
+                </select>
+
+                <button type="submit" class="register-btn">Cadastre-se</button>
+            </form>
+        </div>
+
+        <!-- Bloco de Login -->
+        <div class="login-block">
+            <h2>Registre-se</h2>
+            <button class="google-register">Login com o Google</button>
+            <p>ou</p>
+
+            <form action="#" method="post" class="register-form">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="password">Senha</label>
+                <input type="password" id="password" name="password" required>
+
+                <button type="submit" class="register-btn">Entrar</button>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Loja de Cupcakes. Todos os direitos reservados.</p>
+    </footer>    
+</body>
+</html>
