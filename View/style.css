@@ -59,7 +59,13 @@ header {
     color: #ffa2ff;
 }
 
-#Home a.active {
+#Home a.active,
+#Pedidos a.active,
+#Combos a.active,
+#CrieCupcake a.active,
+#Carrinho a.active,
+#Contato a.active,
+#Beneficios a.active {
     background: #1c1c1c;
     color: white;
     border-radius: 5px;
@@ -181,11 +187,6 @@ main {
     transform: translateX(-50%) translateY(-50%);
 }
 
-.highlight {
-    /* padding: 40px 20px; */
-    /* margin: 50px 0; */
-}
-
 .highlight-container {
     max-width: 1400px;
     margin: 0 auto;
@@ -195,7 +196,7 @@ main {
     grid-template-columns: repeat(4, 1fr);
     gap: 40px;
     justify-content: space-around;
-    border-radius: 8px;
+    border-radius: 15px;
 }
 
 .highlight-item {
@@ -376,4 +377,55 @@ span.pag {
 
 .register-btn:hover {
     background-color: #0056b3;
+}
+
+/* Pedidos */
+
+#Pedidos .highlight-container {
+    display: flex;
+}
+
+#Pedidos .highlight-item {
+    width: 350px;
+    height: 350px;
+    border-radius: 30px;
+    padding: 20px;
+    text-align: start;
+    justify-content: space-between;
+    align-items: start;
+    border: 2px solid black;
+}
+
+.pedido-produtos {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.produto {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.acompanhar-pedido {
+    width: 100%;
+    border-top: 2px solid #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+}
+
+.acompanhar-pedido button {
+    cursor: pointer;
+    padding: 10px 50px;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 20px;
+    transition: all 0.2s ease;
+}
+
+.acompanhar-pedido button:hover {
+    background-color: rgb(33, 33, 33);
+    color: white;
 }

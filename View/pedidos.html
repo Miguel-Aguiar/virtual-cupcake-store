@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja de Cupcakes</title>
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <link rel="shortcut icon" href="./assets/favicon.png" type="image/x-icon">
+
+    <script src="script.js"></script>
+
+</head>
+<body id="Pedidos">
+
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="home.html"><img src="./assets/logo.png" alt="Logo" width="96px" /></a>
+            </div>
+            <ul class="menu">
+                <li><a href="home.html">Home</a></li>
+                <li><a class="active" href="pedidos.html">Pedidos</a></li>
+                <li><a href="combos.html">Combos</a></li>
+                <li><a href="criarCupcake.html">Crie seu Cupcake</a></li>
+                <li><a href="carrinho.html">Carrinho</a></li>
+                <li><a href="contato.html">Contato</a></li>
+                <li><a href="beneficios.html">Benefícios</a></li>
+            </ul>
+            <div class="account-area">
+                <div class="cart-icon">
+                    <a href="#" onclick="toggleCart()" ><img src="./assets/carrinhop.png" /></a>
+                </div>
+                <a href="login.html" class="login-link">Criar conta / Login</a>
+            </div>
+        </nav>
+    </header>
+
+    <div id="cart-sidebar" class="cart-sidebar">
+        <h2>Resumo do Carrinho</h2>
+        <div class="cart-pedido">
+            <img src="./assets/cupcake1m.png" alt="">
+            <span>R$ 7.00 <br> Chocolate</span>
+            <div class="qtd">
+                <div>-</div>
+                <div class="center">5</div>
+                <div>+</div>
+            </div>
+        </div>
+        <p class="cart-total">Valor total: R$ </p>
+        <img class="close" onclick="toggleCart()" src="./assets/fechar.png" width="42px">
+    </div>
+
+    <main>
+        <section class="highlight">
+            <div class="highlight-container">
+                <span class="pag">Pedidos</span>
+                <div class="highlight-item">
+                    <h2>Pedido em andamento</h2>
+                    <div class="pedido-produtos">
+                        <div class="produto">
+                            <span>Combo pequeno</span>
+                            <span>R$ 54,00</span>
+                        </div>
+                        <div class="produto">
+                            <span>Cupcake chocolate</span>
+                            <span>R$ 15,00</span>
+                        </div>
+                        <div class="produto">
+                            <span>Cupcake creme</span>
+                            <span>R$ 24,00</span>
+                        </div>
+                    </div>
+                    <span>Valor Total: R$ 93,00</span>
+                    <div class="acompanhar-pedido">
+                        <a href=""><img src="./assets/plus.png" alt="" width="50px"></a>
+                        <button>Acompanhar pedido</button>
+                    </div>
+                </div>
+                <div class="highlight-item">
+                    <h2>Pedido entregue</h2>
+                    <div class="pedido-produtos">
+                        <div class="produto">
+                            <span>Combo pequeno</span>
+                            <span>R$ 54,00</span>
+                        </div>
+                        <div class="produto">
+                            <span>Cupcake chocolate</span>
+                            <span>R$ 15,00</span>
+                        </div>
+                        <div class="produto">
+                            <span>Cupcake creme</span>
+                            <span>R$ 24,00</span>
+                        </div>
+                    </div>
+                    <span>Valor Total: R$ 93,00</span>
+                    <div class="acompanhar-pedido">
+                        <a href=""><img src="./assets/plus.png" alt="" width="50px"></a>
+                        <button>Repetir pedido</button>
+                    </div>
+                </div>
+                <div class="highlight-item">
+                    <h2>Pedido entregue</h2>
+                    <div class="pedido-produtos">
+                        <div class="produto">
+                            <span>Combo pequeno</span>
+                            <span>R$ 54,00</span>
+                        </div>
+                        <div class="produto">
+                            <span>Cupcake chocolate</span>
+                            <span>R$ 15,00</span>
+                        </div>
+                        <div class="produto">
+                            <span>Cupcake creme</span>
+                            <span>R$ 24,00</span>
+                        </div>
+                    </div>
+                    <span>Valor Total: R$ 93,00</span>
+                    <div class="acompanhar-pedido">
+                        <a href=""><img src="./assets/plus.png" alt="" width="50px"></a>
+                        <button>Repetir pedido</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <p>&copy; 2024 Loja de Cupcakes. Todos os direitos reservados.</p>
+    </footer>    
+</body>
+</html>
