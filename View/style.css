@@ -23,8 +23,18 @@ header {
     margin: 0 auto;
 }
 
+.logo {
+    width: 96px;
+    border: 5px solid #ebecee;
+}
+
 .logo img {
-    width: 80px;
+    width: 100%;
+}
+
+.logo:hover {
+    border: 1px solid black;
+    border-radius: 20px;
 }
 
 .menu {
@@ -74,6 +84,86 @@ header {
 .login-link:hover {
     color: #007bff;
 }
+
+/* Aba do carrinho (inicialmente oculta) */
+.cart-sidebar {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 33%;
+    max-width: 400px;
+    height: 100%;
+    background-color: #f4f4f4;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    transition: right 0.3s ease;
+    z-index: 1000;
+}
+
+/* Quando a aba do carrinho é visível */
+.cart-sidebar.show {
+    right: 0;
+}
+
+.cart-sidebar img.close {
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 16px;
+    border: 5px solid #f4f4f4;
+}
+
+img.close:hover {
+    cursor: pointer;
+    border: none;
+}
+
+.cart-sidebar h2 {
+    margin-bottom: 20px;
+}
+
+.cart-pedido {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart-total {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+div.qtd {
+    display: flex;
+    justify-content: space-around;
+    border: 1px solid black;
+    /* padding: 5px 20px; */
+}
+
+div.qtd {
+    border-radius: 5px;
+}
+
+div.qtd div {
+    padding: 5px 10px;
+}
+
+div.qtd div.center {
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+}
+
+div.qtd div:hover {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+div.qtd div.center:hover {
+    cursor:default;
+    font-weight: normal;
+}
+
 
 /* Vitrine */
 
@@ -129,6 +219,25 @@ span.pag {
     left: 40px;
     font-size: 1.3em;
     font-weight: bold;
+}
+
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s, visibility 0.5s;
+}
+
+.notification.show {
+    opacity: 1;
+    visibility: visible;
 }
 
 .footer {
