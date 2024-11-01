@@ -212,12 +212,8 @@ main {
     align-items: center;
 }
 
-.highlight-item a img {
-    border: 3px solid white;
-}
-
 .highlight-item a img:hover {
-    border: 1px solid white;
+    scale: 1.1;
 }
 
 .border {
@@ -601,4 +597,46 @@ button:hover {
     flex-direction: column;
     align-items: center;
     background-color: #fff;
+}
+
+/* Contato -------------------------------------------------------------------------------------- */
+
+#Contato .highlight-container,
+#Beneficios .highlight-container {
+    display: flex;
+}
+
+#Contato .highlight-item,
+#Beneficios .highlight-item {
+    height: 450px;
+    width: 1000px;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    padding-bottom: 50px;
+}
+
+.contate-nos {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.contate-nos p {
+    padding: 5px;
+    font-size: 1.1em;
+}
+
+.redes a img{
+    margin: 10px 30px;
+}
+.redes a img:hover{
+    scale: 1.1;
+}
+
+/* Benefícios ----------------------------------------------------------------------------------- */
+
+.premios p {
+    margin-bottom: 20px;
+    font-size: 1.1em;
 }
