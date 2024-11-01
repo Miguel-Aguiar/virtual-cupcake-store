@@ -62,7 +62,7 @@ header {
 #Home a.active,
 #Pedidos a.active,
 #Combos a.active,
-#CrieCupcake a.active,
+#CriarCupcake a.active,
 #Carrinho a.active,
 #Contato a.active,
 #Beneficios a.active {
@@ -532,4 +532,73 @@ button:hover {
     top: -50px;
     right: auto;
     left: 20px;
+}
+
+/* Crie seu Cupcake ----------------------------------------------------------------------------- */
+
+#CriarCupcake .highlight-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+#CriarCupcake .highlight-item {
+    flex-direction: row;
+    align-items: flex-start;
+    width: 100%;
+    height: 100%;
+    padding-bottom: 80px;
+}
+
+.divisor {
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+.divisor.ultimo {
+    border-right: none;
+}
+
+.criar-sabor {
+    width: 320px;
+    height: 100%;
+    padding: 20px;
+    font-size: 1.2em;
+}
+
+.criar-sabor .sabor {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    transition: all 0.2s ease;
+}
+
+.criar-sabor .sabor:hover {
+    scale: 1.05;
+}
+
+.criar-sabor .sabor img {
+    width: 50px;
+}
+
+.criar-sabor .sabor span {
+    margin-left: 20px;
+    padding: 10px;
+    border: 1px solid white;
+    border-radius: 5px;
+    border: 2px solid white;
+    cursor: pointer;
+}
+
+.criar-sabor .sabor.selected span {
+    border: 2px solid #98c2f8;
+}
+
+.criar-resultado {
+    position: absolute;
+    bottom: 55px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
 }
