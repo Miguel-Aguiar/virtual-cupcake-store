@@ -9,7 +9,14 @@ function adicionarAoCarrinho() {
     }, 3000);
 }
 
+// Mostra o mini carrinho
 function toggleCart() {
     const cartSidebar = document.getElementById('cart-sidebar');
     cartSidebar.classList.toggle('show');
+}
+
+// Mostra o escolher sabor da página combos
+function escolherSabor() {
+    const chooseFlavor = document.getElementById('choose-flavor');
+    chooseFlavor.classList.toggle('show');
 }

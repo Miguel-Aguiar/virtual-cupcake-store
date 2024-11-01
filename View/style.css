@@ -98,7 +98,6 @@ header {
     color: #ffa2ff;
 }
 
-/* Aba do carrinho (inicialmente oculta) */
 .cart-sidebar {
     position: fixed;
     top: 0;
@@ -113,7 +112,6 @@ header {
     z-index: 1000;
 }
 
-/* Quando a aba do carrinho é visível */
 .cart-sidebar.show {
     right: 0;
 }
@@ -151,7 +149,6 @@ div.qtd {
     display: flex;
     justify-content: space-around;
     border: 1px solid black;
-    /* padding: 5px 20px; */
 }
 
 div.qtd {
@@ -178,7 +175,7 @@ div.qtd div.center:hover {
 }
 
 
-/* Vitrine */
+/* Vitrine --------------------------------------------------------------------------------------*/
 
 main {
     position: absolute;
@@ -239,7 +236,7 @@ span.pag {
 
 .notification {
     position: fixed;
-    top: 20px;
+    top: -20px;
     right: 20px;
     background-color: #4CAF50;
     color: white;
@@ -272,7 +269,7 @@ span.pag {
     position: relative;
 }
 
-/* Login */
+/* Login ----------------------------------------------------------------------------------------*/
 
 .auth-container {
     display: flex;
@@ -379,13 +376,15 @@ span.pag {
     background-color: #0056b3;
 }
 
-/* Pedidos */
+/* Pedidos ------------------------------------------------------------------------------------- */
 
-#Pedidos .highlight-container {
+#Pedidos .highlight-container,
+#Combos .highlight-container {
     display: flex;
 }
 
-#Pedidos .highlight-item {
+#Pedidos .highlight-item,
+#Combos .highlight-item {
     width: 350px;
     height: 350px;
     border-radius: 30px;
@@ -416,7 +415,7 @@ span.pag {
     align-self: center;
 }
 
-.acompanhar-pedido button {
+button {
     cursor: pointer;
     padding: 10px 50px;
     background-color: white;
@@ -424,8 +423,113 @@ span.pag {
     border-radius: 20px;
     transition: all 0.2s ease;
 }
-
-.acompanhar-pedido button:hover {
+button:hover {
     background-color: rgb(33, 33, 33);
     color: white;
+}
+
+/* Combos -------------------------------------------------------------------------------------- */
+
+#Combos .highlight-item {
+    align-items: center;
+}
+
+.sabores {
+    border-bottom: 2px solid black;
+}
+
+.combos-desc {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.combos-sabores {
+    display: flex;
+    gap: 25px;
+}
+
+.combos-sabores .sabor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.desconto {
+    position: fixed;
+    bottom: 12px;
+}
+
+.choose-flavor.show {
+    display: block;
+    opacity: 1;
+    width: 1210px;
+    height: 440px;
+    z-index: 1;
+}
+
+.choose-flavor {
+    position: absolute;
+    top: -10px;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    z-index: -99;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 20px;
+    padding: 10px 20px;
+    transition: opacity 0.5s ease, width 0.5s ease, height 0.5s ease;
+    font-size: 1.2em;
+}
+
+.choose-flavor img.close {
+    position: absolute;
+    border: none;
+    right: 14px;
+    top: 5px;
+}
+
+.choose-flavor h2 {
+    margin-bottom: 20px;
+}
+
+.choose-flavor .combo-sabores {
+    display: flex;
+}
+
+.choose-flavor .descricao {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+    line-height: 1.3em;
+}
+
+.choose-flavor img {
+    border-bottom: 2px solid black;
+}
+
+.choose-flavor img.close:hover {
+    transform: scale(1.1);
+}
+
+.choose-flavor .descricao span {
+    display: block;
+    width: 55%;
+}
+
+.choose-flavor-footer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 70px;
+}
+
+.choose-flavor .notification {
+    top: -50px;
+    right: auto;
+    left: 20px;
 }
