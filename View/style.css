@@ -116,6 +116,11 @@ header {
     right: 0;
 }
 
+.cart-sidebar button {
+    width: 100%;
+    margin-top: 20px;
+}
+
 .cart-sidebar img.close {
     cursor: pointer;
     position: absolute;
@@ -202,7 +207,7 @@ main {
     height: 230px;
     flex: 1;
     text-align: center;
-    border-radius: 8px;
+    border-radius: 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     font-weight: bold;
 
@@ -219,7 +224,7 @@ main {
 .border {
     display: block;
     width: 100%;
-    border-bottom: 1px solid black;
+    border-bottom: 2px solid black;
 }
 
 span.pag {
@@ -385,6 +390,7 @@ span.pag {
     height: 350px;
     border-radius: 30px;
     padding: 20px;
+    padding-top: 10px;
     text-align: start;
     justify-content: space-between;
     align-items: start;
@@ -404,11 +410,17 @@ span.pag {
 
 .acompanhar-pedido {
     width: 100%;
+    height: 65px;
+    padding-top: 20px;
     border-top: 2px solid #000;
     display: flex;
     flex-direction: column;
     align-items: center;
     align-self: center;
+}
+
+.acompanhar-pedido img {
+    width: 100%;
 }
 
 button {
@@ -428,6 +440,10 @@ button:hover {
 
 #Combos .highlight-item {
     align-items: center;
+}
+
+#Combos h3 {
+    font-size: 1.5em;
 }
 
 .sabores {
@@ -457,14 +473,15 @@ button:hover {
 }
 
 .choose-flavor.show {
-    display: block;
     opacity: 1;
     width: 1210px;
     height: 440px;
     z-index: 1;
+    user-select: auto;
 }
 
 .choose-flavor {
+    /* display: none; */
     position: absolute;
     top: -10px;
     opacity: 0;
@@ -477,9 +494,19 @@ button:hover {
     padding: 10px 20px;
     transition: opacity 0.5s ease, width 0.5s ease, height 0.5s ease;
     font-size: 1.2em;
+    z-index: 1;
+    user-select: none;
 }
 
-.choose-flavor img.close {
+.choose-flavor img:hover {
+    cursor: auto;
+}
+
+.choose-flavor.show img:hover {
+    cursor: pointer;
+}
+
+.choose-flavor img.close{
     position: absolute;
     border: none;
     right: 14px;
@@ -522,6 +549,14 @@ button:hover {
     justify-content: space-around;
     align-items: center;
     margin-top: 70px;
+}
+
+.choose-flavor-footer .desconto {
+    position: absolute;
+    bottom: 13px;
+    right: 88px;
+    color: #6ce36c;
+    font-weight: bold;
 }
 
 .choose-flavor .notification {
@@ -646,3 +681,225 @@ button:hover {
     margin-bottom: 20px;
     font-size: 1.1em;
 }
+
+/* Carrinho ------------------------------------------------------------------------------------- */
+
+#Carrinho .highlight-container {
+    display: flex;
+    width: 1310px;
+    padding-right: 440px;
+}
+
+#Carrinho .carrinho-itens {
+    display: flex;
+    gap: 40px;
+    width: 830px;
+    overflow-x: auto;
+
+    scrollbar-width: none;
+}
+
+#Carrinho span.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    font-size: 1.9em;
+    cursor: pointer;
+    user-select: none;
+}
+
+#Carrinho .left {
+    left: 10px;
+}
+
+#Carrinho .right {
+    right: 410px;
+}
+
+#Carrinho ::-webkit-scrollbar{
+    display: none;
+}
+
+#Carrinho .highlight-item {
+    flex: auto;
+    height: 350px;
+    justify-content: space-around;
+
+    min-width: 200px;
+}
+
+#Carrinho .highlight-item-combo {
+    width: 350px;
+    min-width: 350px;
+}
+
+#Carrinho .resumo-carrinho .pag{
+    left: 50%;
+    translate: -50%;
+}
+
+#Carrinho .resumo-carrinho {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    width: 400px;
+    height: 390px;
+
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    padding-top: 45px;
+
+    border: 1px solid #cdcdcd;
+    border-radius: 50px;
+}
+
+#Carrinho .resumo {
+    width: 100%;
+}
+
+#Carrinho .resumo-itens {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+#Carrinho .resumo-pedido-footer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#Carrinho .qtd {
+    font-weight: normal;
+}
+
+.fechar-pedido {
+    position: absolute;
+    top: -10px;
+    left: 0;
+    width: 0;
+    height: 0;
+    background-color: #fff;
+    border-radius: 20px;
+    font-size: 1.2em;
+    opacity: 0;
+    /* padding: 10px 20px; */
+    transition: opacity 0.5s ease, width 0.5s ease, height 0.5s ease;
+
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.fechar-pedido.show {
+    border: 2px solid black;
+    width: 1310px;
+    height: 440px;
+    opacity: 1;
+}
+
+
+.fechar-pedido img.close {
+    position: absolute;
+    border: none;
+    right: 9px;
+    top: 5px;
+}
+
+.fechar-pedido img:hover {
+    cursor: auto;
+}
+
+.fechar-pedido.show img:hover {
+    cursor: pointer;
+}
+
+.fechar-pedido div.center {
+    border-left: 2px solid #000;
+    border-right: 2px solid #000;
+}
+
+.fechar-pedido .fechar-pedido-passos {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+
+    width: 33%;
+    padding: 10px 20px;
+}
+
+.fechar-pedido .fechar-pedido-passos h1 {
+    margin-bottom: 50px;
+    align-self: center;
+}
+
+.fechar-pedido form {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 100%;
+}
+
+.fechar-pedido select {
+    padding: 5px;
+    width: 75%;
+    margin-bottom: 20px;
+}
+
+.fechar-pedido input {
+    padding: 4px;
+    margin-bottom: 20px;
+}
+
+.fechar-pedido div input[name=cep] {
+    width: 30%;
+}
+
+.fechar-pedido div input[name=endereco] {
+    width: 75%;
+}
+
+.fechar-pedido .input-group {
+    display: flex;
+}
+
+.fechar-pedido div.opcao {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+.fechar-pedido div.opcao span {
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.fechar-pedido div.selected span {
+    border: 2px solid #98c2f8;
+}
+
+.fechar-pedido-passos.center button {
+    align-self: center;
+    margin-top: 88px;
+}
+
+.fechar-pedido .resumo {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* .fechar-pedido .beneficios {
+    margin-top: 30px;
+}
+
+.fechar-pedido .resumo-pedido-footer {
+    position: relative;
+    bottom: -158px;
+} */

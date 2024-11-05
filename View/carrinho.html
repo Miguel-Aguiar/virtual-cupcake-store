@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja de Cupcakes</title>
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <link rel="shortcut icon" href="./assets/favicon.png" type="image/x-icon">
+
+    <!-- <script src="script.js"></script> -->
+
+</head>
+<body id="Carrinho">
+
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="home.html"><img src="./assets/logo.png" alt="Logo" width="96px" /></a>
+            </div>
+            <ul class="menu">
+                <li><a href="home.html">Home</a></li>
+                <li><a href="pedidos.html">Pedidos</a></li>
+                <li><a href="combos.html">Combos</a></li>
+                <li><a href="criarCupcake.html">Crie seu Cupcake</a></li>
+                <li><a class="active" href="carrinho.html">Carrinho</a></li>
+                <li><a href="contato.html">Contato</a></li>
+                <li><a href="beneficios.html">Benefícios</a></li>
+            </ul>
+            <div class="account-area">
+                <div class="cart-icon">
+                    <a href="#" onclick="toggleCart()" ><img src="./assets/carrinhop.png" /></a>
+                </div>
+                <a href="login.html" class="login-link">Criar conta / Login</a>
+            </div>
+        </nav>
+    </header>
+
+    <div id="cart-sidebar" class="cart-sidebar">
+        <h2>Resumo do Carrinho</h2>
+        <div class="cart-pedido">
+            <img src="./assets/cupcake1m.png" alt="">
+            <span>R$ 7.00 <br> Chocolate</span>
+            <div class="qtd">
+                <div>-</div>
+                <div class="center">5</div>
+                <div>+</div>
+            </div>
+        </div>
+        <p class="cart-total">Valor total: R$ </p>
+        <button>Ir para o carrinho</button>
+        <img class="close" onclick="toggleCart()" src="./assets/fechar.png" width="42px">
+    </div>
+
+    <main>
+        <section class="highlight">
+            <div class="highlight-container">
+                <span class="pag">Carrinho</span>
+                <div class="carrinho-itens">
+                    <span onclick="scrollar('left')" class="arrow left">&lt;</span>
+                    <span onclick="scrollar('right')" class="arrow right">&gt;</span>
+                    
+                    <div class="highlight-item highlight-item-combo">
+                        <div class="sabores">
+                           <img src="./assets/cupcake1m.png">
+                           <img src="./assets/cupcake1m.png">
+                           <img src="./assets/cupcake1m.png">
+                        </div>
+                        <div class="combos-desc">
+                           <span>Combo pequeno</span>
+                           <span>3 cupcakes de cada sabor</span>
+                        </div>
+                        <div class="combos-sabores">
+                           <div class="sabor">
+                               <span>R$ 6,00</span>
+                               <span>Morango</span>
+                           </div>
+                           <div class="sabor">
+                               <span>R$ 6,50</span>
+                               <span>Chocolate</span>
+                           </div>
+                           <div class="sabor">
+                               <span>R$ 7,00</span>
+                               <span>Pistache</span>
+                           </div>
+                        </div>
+                        <small>Valor Total: R$54,00</small>
+                    </div>
+                    <div class="highlight-item">
+                        <div class="sabores">
+                            <img src="./assets/cupcake1m.png">
+                        </div>
+                        <div>
+                            <span>R$ 7,00</span>
+                            <br><span>Chocolate</span>
+                        </div>
+                        <small>Quantidade: 2</small>
+                    </div>
+                    <div class="highlight-item">
+                        <div class="sabores">
+                            <img src="./assets/cupcake1m.png">
+                        </div>
+                        <div>
+                            <span>R$ 7,00</span>
+                            <br><span>Chocolate</span>
+                        </div>
+                        <small>Quantidade: 2</small>
+                    </div>
+                    <div class="highlight-item">
+                        <div class="sabores">
+                            <img src="./assets/cupcake1m.png">
+                        </div>
+                        <div>
+                            <span>R$ 7,00</span>
+                            <br><span>Chocolate</span>
+                        </div>
+                        <small>Quantidade: 2</small>
+                    </div>
+                </div>
+                <div class="resumo-carrinho highlight-item">
+                    <span class="pag">Resumo do Pedido</span>
+                    <div class="resumo">
+                        <div class="resumo-itens">
+                            <span>Combo pequeno</span>
+                            <span>R$ 54,00</span>
+                            <div class="qtd">
+                                <div>-</div>
+                                <div class="center">5</div>
+                                <div>+</div>
+                            </div>
+                        </div>
+                        <div class="resumo-itens">
+                            <span>Cupcake chocolate</span>
+                            <span>R$ 15,00</span>
+                            <div class="qtd">
+                                <div>-</div>
+                                <div class="center">5</div>
+                                <div>+</div>
+                            </div>
+                        </div>
+                        <div class="resumo-itens">
+                            <span>Cupcake chocolate</span>
+                            <span>R$ 24,00</span>
+                            <div class="qtd">
+                                <div>-</div>
+                                <div class="center">5</div>
+                                <div>+</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="resumo-pedido-footer">
+                        <span>Valor total: R$ 93,00</span>
+                        <button onclick="fecharPedido()">Fechar pedido</button>
+                    </div>
+                </div>
+                <div id="FecharPedido" class="fechar-pedido">
+                    <img class="close" onclick="fecharPedido()" src="./assets/fechar.png" width="42px">
+                    <div class="fechar-pedido-passos">
+                        <h1>Endereço</h1>
+                        <form>
+                            <select name="endereço" id="endereco">
+                                <option value="Endereço principal">Endereço principal</option>
+                                <option value="Outro">Outro</option>
+                            </select>
+                            <label for="cep">CEP:</label>
+                            <input type="text" id="cep" name="cep" placeholder="00000-000" maxlength="9" pattern="\d{5}-?\d{3}" required>
+                            <label for="endereco">Endereço:</label>
+                            <input type="text" id="endereco" name="endereco" placeholder="Rua Exemplo, Av. Exemplo" required>
+                            <div class="input-group">
+                                <div>
+                                    <label for="numero">Número:</label>
+                                    <input type="text" id="numero" name="numero" placeholder="123" required>
+                                </div>
+                                <div>
+                                    <label for="complemento">Complemento:</label><br>
+                                    <input type="text" id="complemento" name="complemento" placeholder="Apto, bloco, etc.">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="fechar-pedido-passos center">
+                        <h1>Forma de Pagamento</h1>
+                        <div class="opcao" onclick="selecionarMetodoPagamento(this, 'credito')">
+                            <img src="./assets/cartao.png">
+                            <span>Cartão de crédito</span>
+                        </div>
+                        <div class="opcao" onclick="selecionarMetodoPagamento(this, 'pix')">
+                            <img src="./assets/pix.png">
+                            <span>Pix</span>
+                        </div>
+                        <div class="opcao" onclick="selecionarMetodoPagamento(this, 'dinheiro')">
+                            <img src="./assets/dinheiro.png">
+                            <span>Dinheiro</span>
+                        </div>
+                        <button onclick="realizarPagamento()">Realizar pagamento</button>
+                    </div>
+                    <div class="fechar-pedido-passos">
+                        <h1>Resumo do pedido</h1>
+                        <div class="resumo">
+                            <div>
+                                <div class="resumo-itens">
+                                    <span>Combo pequeno</span>
+                                    <span>R$ 54,00</span>
+                                </div>
+                                <div class="resumo-itens">
+                                    <span>Cupcake chocolate</span>
+                                    <span>R$ 15,00</span>
+                                </div>
+                                <div class="resumo-itens">
+                                    <span>Cupcake chocolate</span>
+                                    <span>R$ 24,00</span>
+                                </div>
+                            </div>
+                            <div class="beneficios">
+                                <label>Utilizar benefícios</label>
+                                <select>
+                                    <option value="">Selecionar benefício</option>
+                                    <option value="cupons">Cupons</option>
+                                    <option value="cashback">Cashback</option>
+                                    <option value="cupcake">Cupcakes</option>
+                                </select>
+                            </div>
+                            <div class="resumo-pedido-footer">
+                                <span>Valor total: R$ 93,00</span>
+                                <button onclick="fecharPedido()">Alterar pedido</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <p>&copy; 2024 Loja de Cupcakes. Todos os direitos reservados.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

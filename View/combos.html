@@ -49,6 +49,7 @@
             </div>
         </div>
         <p class="cart-total">Valor total: R$ </p>
+        <button>Ir para o carrinho</button>
         <img class="close" onclick="toggleCart()" src="./assets/fechar.png" width="42px">
     </div>
 
@@ -58,14 +59,14 @@
                 <span class="pag">Combos</span>
 
                 <div class="highlight-item">
+                    <h3>Pequeno</h3>
                     <div class="sabores">
                         <img src="./assets/cupcake1m.png" alt="">
                         <img src="./assets/cupcake1m.png" alt="">
                         <img src="./assets/cupcake1m.png" alt="">
                     </div>
                     <div class="combos-desc">
-                        <span>Combo pequeno</span>
-                        <span>3 Cupcakes de cada sabor</span>
+                        <span>9x Cupcakes</span>
                     </div>
                     <div class="combos-sabores">
                         <div class="sabor">
@@ -87,14 +88,14 @@
                     <small class="desconto">5% de desconto</small>
                 </div>
                 <div class="highlight-item">
+                    <h3>Médio</h3>
                     <div class="sabores">
                         <img src="./assets/cupcake1m.png" alt="">
                         <img src="./assets/cupcake1m.png" alt="">
                         <img src="./assets/cupcake1m.png" alt="">
                     </div>
                     <div class="combos-desc">
-                        <span>Combo médio</span>
-                        <span>5 Cupcakes de cada sabor</span>
+                        <span>15x Cupcakes</span>
                     </div>
                     <div class="combos-sabores">
                         <div class="sabor">
@@ -116,14 +117,14 @@
                     <small class="desconto">10% de desconto</small>
                 </div>
                 <div class="highlight-item">
+                    <h3>Grande</h3>
                     <div class="sabores">
                         <img src="./assets/cupcake1m.png" alt="">
                         <img src="./assets/cupcake1m.png" alt="">
                         <img src="./assets/cupcake1m.png" alt="">
                     </div>
                     <div class="combos-desc">
-                        <span>Combo grande</span>
-                        <span>10 Cupcakes de cada sabor</span>
+                        <span>30x Cupcakes</span>
                     </div>
                     <div class="combos-sabores">
                         <div class="sabor">
@@ -145,7 +146,7 @@
                     <small class="desconto">15% de desconto</small>
                 </div>
                 <div id="choose-flavor" class="choose-flavor">
-                    <h2>Combo pequeno</h2>
+                    <h2>Escolha os sabores</h2>
                     <img class="close" onclick="escolherSabor()" src="./assets/fechar.png" width="42px">
                     <div class="combo-sabores">
                         <div class="descricao">
@@ -167,7 +168,11 @@
                     <div class="choose-flavor-footer">
                         <span>10 unidades de cada</span>
                         <button onclick="adicionarAoCarrinho()">Adicionar ao carrinho</button>
-                        <span>Valor Total: R$ 205,00</span>
+                        <div>
+                            <span>Valor Total: <s>R$ 210,00</s></span>
+                            <span class="desconto">15% de desconto: R$ 178,50</span>
+                            
+                        </div>
                     </div>
                     <div id="notification" class="notification">Item adicionado ao carrinho!</div>
                 </div>
