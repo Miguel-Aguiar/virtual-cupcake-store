@@ -122,5 +122,42 @@ function selecionarMetodoPagamento(element, tipo) {
 // Realizar pagamento
 function realizarPagamento() {
     window.location.href = "http://127.0.0.1:5500/View/pedidos.html";
-    
 }
+
+//Acompanhar pedido
+function acompanharPedido() {
+    const acompanharPedido = document.getElementById('AcompanharPedido');
+    acompanharPedido.classList.toggle('show');
+}
+
+function confirmarEntrega() {
+    acompanharPedido();
+    const avaliarPedido = document.getElementById('AvaliarPedido');
+    avaliarPedido.classList.toggle("show");
+}
+
+function fecharAvaliacao() {
+    const avaliarPedido = document.getElementById('AvaliarPedido');
+    avaliarPedido.classList.toggle("show");
+}
+
+function selecionarQualidade(element) {
+    element.classList.toggle('selected')
+}
+
+// Preencher as estrelas na avaliação
+function fillStar(starValue) {
+    
+    const stars = document.querySelectorAll('.star');
+    
+    // Remover a classe 'filled' de todas as estrelas
+    stars.forEach(star => star.classList.remove('filled'));
+    
+    // Adicionar a classe 'filled' até a estrela clicada
+    stars.forEach((star, index) => {
+        if (index < starValue) {
+            console.log("entro aqi");
+            star.classList.add('filled');
+        }
+    });
+  }
