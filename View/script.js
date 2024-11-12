@@ -1,4 +1,10 @@
 function adicionarAoCarrinho() {
+    // Lógica para adicionar ao carrinho
+
+    exibirNotificacao();
+}
+
+function exibirNotificacao(){
     const notification = document.getElementById('notification');
     
     const currentPath = window.location.pathname;
@@ -17,7 +23,7 @@ function adicionarAoCarrinho() {
 
     // Mostra a notificação
     notification.classList.add('show');
-
+    
     // Oculta a notificação após 3 segundos
     setTimeout(() => {
         notification.classList.remove('show');
@@ -28,13 +34,6 @@ function adicionarAoCarrinho() {
 function toggleCart() {
     const cartSidebar = document.getElementById('cart-sidebar');
     cartSidebar.classList.toggle('show');
-}
-
-// Mostra o escolher sabor da página combos
-function escolherSabor() {
-    const chooseFlavor = document.getElementById('choose-flavor');
-    // chooseFlavor.style.display = 'block';
-    chooseFlavor.classList.toggle('show');
 }
 
 // Seleciona sabor no criar cupcake
@@ -61,7 +60,6 @@ function selecionarSabor(element, tipo) {
 }
 
 // Scroll horizontal 
-
 const carrinhoContainer = document.querySelector('.carrinho-itens');
 let scrollAmount = 0; // Armazena o valor da rolagem a ser aplicado
 let isScrolling = false; // Verifica se já está rolando
@@ -97,12 +95,6 @@ function scrollar(lado) {
     });
 }
 
-// Fechar pedido
-function fecharPedido(){
-    const fecharPedido = document.getElementById('FecharPedido');
-    fecharPedido.classList.toggle('show')
-}
-
 // Selecionar método de pagamento
 function selecionarMetodoPagamento(element, tipo) {
     const metodoPagamento = document.querySelectorAll('div.opcao');
@@ -128,17 +120,62 @@ function realizarPagamento() {
 function acompanharPedido() {
     const acompanharPedido = document.getElementById('AcompanharPedido');
     acompanharPedido.classList.toggle('show');
+    
+    esconderMain(acompanharPedido);
 }
 
 function confirmarEntrega() {
     acompanharPedido();
     const avaliarPedido = document.getElementById('AvaliarPedido');
     avaliarPedido.classList.toggle("show");
+
+    esconderMain(avaliarPedido);
 }
 
-function fecharAvaliacao() {
-    const avaliarPedido = document.getElementById('AvaliarPedido');
-    avaliarPedido.classList.toggle("show");
+// Enviar avaliação
+function enviarAvaliacao(){
+    exibirNotificacao();
+    //Lógica para guardar avaliação
+}
+
+function toggleSecao(secao) {
+    let temp;
+    switch(secao){
+        case 'acompanhar-pedido':
+            temp = document.getElementById('AcompanharPedido');
+            break;
+
+        case 'confirmar-entrega':
+            temp = document.getElementById('AvaliarPedido');
+            document.getElementById('AcompanharPedido').classList.toggle("show");
+            break;
+            
+        case 'fechar-avaliacao':
+            temp = document.getElementById('AvaliarPedido');
+            break;
+            
+        case 'enviar-avaliacao':
+            temp = document.getElementById('AvaliarPedido');
+            enviarAvaliacao();
+            break;
+
+        case 'escolher-sabor':
+            temp = document.getElementById('EscolherSabor');
+            break;
+        }
+    
+    temp.classList.toggle("show");
+    esconderMain(temp);
+}
+
+function esconderMain(show) {
+    
+    const main = document.querySelector('.main')
+    if(show.classList.contains('show')){
+        main.style.display = 'none'
+    } else {
+        main.style.display = 'flex'
+    }
 }
 
 function selecionarQualidade(element) {
@@ -156,8 +193,19 @@ function fillStar(starValue) {
     // Adicionar a classe 'filled' até a estrela clicada
     stars.forEach((star, index) => {
         if (index < starValue) {
-            console.log("entro aqi");
             star.classList.add('filled');
         }
     });
-  }
+}
+
+function toggleMenu() {
+    const menu = document.querySelector('ul.menu');
+    menu.classList.toggle('active');
+}
+
+// ajustarFooter()
+// function ajustarFooter {
+//     const windowHeight = window.innerHeight;
+//     const footer = document.querySelector('footer')
+//     footer.style.bottom = '-34px';
+// }

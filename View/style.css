@@ -7,6 +7,9 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #ffcbf6;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 header {
@@ -19,8 +22,8 @@ header {
 .navbar {
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    /* max-width: 1200px; */
+    justify-content: space-between;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
@@ -43,8 +46,8 @@ header {
     list-style-type: none;
     display: flex;
     gap: 10px;
-    position: relative;
-    left: 30px;
+    /* position: relative;
+    left: 30px; */
 }
 
 .menu li a {
@@ -179,14 +182,27 @@ div.qtd div.center:hover {
     font-weight: normal;
 }
 
+button.menu-toggle {
+    display: none; /* Esconde o botão no desktop */
+    background: none;
+    border: none;
+    border-radius: 10px;
+    padding: 0 10px;
+    font-size: 1.5rem;
+    color: #000;
+    cursor: pointer;
+  }
 
 /* Vitrine --------------------------------------------------------------------------------------*/
 
 main {
-    position: absolute;
-    top: 53%;
-    left: 50%;    
-    transform: translateX(-50%) translateY(-50%);
+    max-width: 75%;
+    min-width: 920px;
+    margin: 50px auto;
+}
+
+.highlight {
+    position: relative;
 }
 
 .highlight-container {
@@ -203,7 +219,8 @@ main {
 
 .highlight-item {
     background-color: #ffffff;
-    width: 200px;
+    width: 100%;
+    min-width: 180px;
     height: 230px;
     flex: 1;
     text-align: center;
@@ -230,17 +247,23 @@ main {
 span.pag {
     position: absolute;
     top: -10px;
-    left: 40px;
     font-size: 1.3em;
     font-weight: bold;
 }
 
+#Pedidos span.pag,
+#Combos span.pag,
+#Carrinho span.pag {
+    left: 40px;
+}
+
 .notification {
-    position: fixed;
+    position: absolute;
     top: -20px;
     right: 20px;
     background-color: #4CAF50;
     color: white;
+    text-align: center;
     padding: 10px 20px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -255,11 +278,11 @@ span.pag {
     z-index: 99;
 }
 
-.footer {
-    position: fixed;
-    bottom: 0%;
+footer {
+    margin-top: auto;
     width: 100%;
-    padding: 30px 0;
+    height: 80px;
+    padding: 30px;
     background-color: #333;
     color: #fff;
     border-top: 4px solid #252525;
@@ -267,16 +290,17 @@ span.pag {
     font-size: 1em;
 }
 
-#Login .footer {
+/* #Login .footer {
     position: relative;
-}
+} */
 
 /* Login ----------------------------------------------------------------------------------------*/
 
 .auth-container {
     display: flex;
-    max-width: 1200px;
-    background-color: #fff;
+    /* max-width: 1200px; */
+    max-width: 80%;
+    /* background-color: #fff; */
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -284,6 +308,7 @@ span.pag {
 }
 
 .register-block, .login-block {
+    background-color: #fff;
     width: 50%;
     padding: 40px;
 }
@@ -383,11 +408,18 @@ span.pag {
 #Pedidos .highlight-container,
 #Combos .highlight-container {
     display: flex;
+    flex-wrap: wrap;
+}
+
+.main {
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 40px;
 }
 
 #Pedidos .highlight-item,
 #Combos .highlight-item {
-    width: 350px;
+    min-width: 270px;
     height: 350px;
     border-radius: 30px;
     padding: 20px;
@@ -396,6 +428,10 @@ span.pag {
     justify-content: space-between;
     align-items: start;
     border: 2px solid black;
+}
+
+#Pedidos h2 {
+    font-size: 1.3em;
 }
 
 .pedido-produtos {
@@ -447,7 +483,7 @@ button:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 400px;
+    width: 50%;
     height: 100%;
     margin: auto;
     padding-top: 20px;
@@ -499,6 +535,7 @@ button:hover {
 
 span.previsao {
     margin-top: 50px;
+    text-align: center;
 }
 
 .mapa {
@@ -523,12 +560,13 @@ span.previsao {
     border: 1px solid black;
     border-radius: 20px;
     padding: 20px;
-    height: 400px;
+    height: 250px;
     margin: auto;
     margin-bottom: 20px;
 }
 
 .avaliar-pedido {
+    /* width: 100%; */
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -560,6 +598,7 @@ span.previsao {
 
 .avaliar-pedido .qualidades {
     display: flex;
+    text-align: center;
 }
 
 .avaliar-pedido .qualidades div {
@@ -582,8 +621,8 @@ span.previsao {
 
 .avaliar-pedido textarea {
     resize: none;
-    width: 300px;
-    height: 70px;
+    width: 30%;
+    height: 50px;
     padding: 0 2px;
 }
 
@@ -592,6 +631,8 @@ span.previsao {
 }
 
 /* Combos -------------------------------------------------------------------------------------- */
+
+
 
 #Combos .highlight-item {
     align-items: center;
@@ -603,6 +644,11 @@ span.previsao {
 
 .sabores {
     border-bottom: 2px solid black;
+    text-align: center;
+}
+
+.sabores img {
+    width: 32%;
 }
 
 .combos-desc {
@@ -622,25 +668,19 @@ span.previsao {
     align-items: center;
 }
 
-.desconto {
-    position: fixed;
-    bottom: 12px;
-}
-
 .choose-flavor.show {
     opacity: 1;
-    width: 1210px;
+    width: 100%;
     height: 440px;
     z-index: 99;
     user-select: auto;
 }
 
 .choose-flavor {
-    /* display: none; */
     position: absolute;
     top: -10px;
     opacity: 0;
-    width: 0;
+    width: 100%;
     height: 0;
     z-index: -99;
     background-color: white;
@@ -649,16 +689,14 @@ span.previsao {
     padding: 10px 20px;
     transition: opacity 0.5s ease, width 0.5s ease, height 0.5s ease;
     font-size: 1.2em;
-    z-index: 1;
     user-select: none;
 }
 
-.choose-flavor img:hover {
-    cursor: auto;
-}
-
-.choose-flavor.show img:hover {
-    cursor: pointer;
+#Combos .choose-flavor {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 20px;
 }
 
 .choose-flavor img.close{
@@ -669,7 +707,7 @@ span.previsao {
 }
 
 .choose-flavor h2 {
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
 }
 
 .choose-flavor .combo-sabores {
@@ -696,28 +734,26 @@ span.previsao {
 
 .choose-flavor .descricao span {
     display: block;
-    width: 55%;
+    width: 75%;
 }
 
 .choose-flavor-footer {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    margin-top: 70px;
+    text-align: center;
 }
 
 .choose-flavor-footer .desconto {
     position: absolute;
-    bottom: 13px;
-    right: 88px;
+    bottom: 0;
+    right: 80px;
     color: #6ce36c;
     font-weight: bold;
 }
 
 .choose-flavor .notification {
-    top: -50px;
-    right: auto;
-    left: 20px;
+    /* right: 60px; */
 }
 
 /* Crie seu Cupcake ----------------------------------------------------------------------------- */
@@ -728,12 +764,22 @@ span.previsao {
     gap: 0;
 }
 
+#CriarCupcake .main {
+    width: 100%;
+    gap: 0;
+    /* flex-direction: row; */
+    flex-wrap: nowrap;
+}
+
 #CriarCupcake .highlight-item {
-    flex-direction: row;
-    align-items: flex-start;
+    flex-direction: column;
+    /* align-items: flex-start; */
     width: 100%;
     height: 100%;
-    padding-bottom: 80px;
+}
+
+#CriarCupcake h2 {
+    font-size: 1.3em;
 }
 
 .divisor {
@@ -746,8 +792,9 @@ span.previsao {
 }
 
 .criar-sabor {
-    width: 320px;
-    height: 350px;
+    /* width: 320px; */
+    width: 100%;
+    /* height: 350px; */
     padding: 20px;
     font-size: 1.2em;
 }
@@ -787,12 +834,9 @@ span.previsao {
 }
 
 .criar-resultado {
-    position: absolute;
-    bottom: 55px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    background-color: #fff;
+    margin: 20px;
 }
 
 /* Contato -------------------------------------------------------------------------------------- */
@@ -841,14 +885,18 @@ span.previsao {
 
 #Carrinho .highlight-container {
     display: flex;
-    width: 1310px;
-    padding-right: 440px;
+    /* width: 1310px; */
+    /* padding-right: 440px; */
+}
+
+#Carrinho .highlight-item {
+    width: auto;
 }
 
 #Carrinho .carrinho-itens {
     display: flex;
     gap: 40px;
-    width: 830px;
+    /* width: 830px; */
     overflow-x: auto;
 
     scrollbar-width: none;
@@ -864,11 +912,11 @@ span.previsao {
 }
 
 #Carrinho .left {
-    left: 10px;
+    left: 11px;
 }
 
 #Carrinho .right {
-    right: 410px;
+    right: 400px;
 }
 
 #Carrinho ::-webkit-scrollbar{
@@ -883,31 +931,39 @@ span.previsao {
     min-width: 200px;
 }
 
+#Carrinho .highlight-item .sabores img {
+    width: auto;
+}
+
+#Carrinho .highlight-item-combo .sabores img {
+    width: 32%;
+}
+
 #Carrinho .highlight-item-combo {
     width: 350px;
     min-width: 350px;
 }
 
 #Carrinho .resumo-carrinho .pag{
-    left: 50%;
-    translate: -50%;
+    left: auto;
 }
 
 #Carrinho .resumo-carrinho {
-    position: absolute;
+    /* position: absolute;
     top: 0;
-    right: 0;
+    right: 0; */
 
-    width: 400px;
-    height: 390px;
-
+    /* width: 400px;
+    height: 390px; */
+    min-width: 350px;
     display: flex;
     justify-content: space-between;
     padding: 20px;
-    padding-top: 45px;
+    /* padding-top: 45px; */
 
     border: 1px solid #cdcdcd;
     border-radius: 50px;
+    font-size: 1.0em;
 }
 
 #Carrinho .resumo {
@@ -920,12 +976,14 @@ span.previsao {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
+    font-size: 0.95em;
 }
 
 #Carrinho .resumo-pedido-footer {
     width: 100%;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 10px;
 }
 
@@ -1048,4 +1106,301 @@ span.previsao {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+
+/* Media Query */
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (max-width: 1200px) {
+    footer {
+        /* position: relative; */
+    }
+
+    #Combos .choose-flavor-footer .desconto {
+        right: 15px;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (max-width: 992px) {
+
+    body {
+        overflow-y: auto;
+    }
+
+    header {
+        padding: 0 20px;
+    }
+
+    ul.menu {
+        display: none; /* Esconde os links do menu */
+        flex-direction: column;
+        position: absolute;
+        top: 0px; /* Ajuste conforme necessário */
+        right: -5px;
+        left: 70%;
+        bottom: auto;
+        z-index: 1;
+        gap: 25px;
+        background-color: #333;
+        padding: 1rem;
+        border-radius: 5px;
+    }
+
+    ul.menu a {
+        color: white;
+    }
+
+    ul.menu.active {
+        display: flex; /* Mostra o menu quando clicado */
+    }
+
+    button.menu-toggle {
+        display: block; /* Exibe o botão no mobile */
+    }
+
+    main {
+        max-width: 85%;
+        min-width: 480px;
+    }
+
+    .highlight-container {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 30px;
+    }
+
+    #Pedidos main {
+        max-width: 95%;
+    }
+
+    #Combos .choose-flavor .descricao span {
+        width: 90%;
+        font-size: 0.9em;
+    }
+
+    #CriarCupcake main {
+        max-width: 95%;
+    }
+
+    #CriarCupcake .criar-sabor {
+        font-size: 0.95em;
+    }
+
+    #Login .auth-container {
+        max-width: 90%;
+        flex-direction: column;
+        
+        box-shadow: none;
+    }
+
+    #Login .register-block,
+    #Login .login-block {
+        width: 100%;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    #Login .login-block {
+        /* border-top: 1px solid black; */
+        margin-top: 50px;
+    }
+
+    #Carrinho .highlight-container {
+        flex-direction: column;
+    }
+
+    #Carrinho .carrinho-itens {
+        gap: 30px;
+    }
+
+    #Carrinho .resumo-carrinho .pag{
+        top: 390px;
+    }
+
+    #Carrinho span.arrow {
+        top: 210px;
+    }
+
+    #Carrinho .left {
+        left: 6px;
+    }
+    
+    #Carrinho .right {
+        left: 387px;
+    }
+
+    #Carrinho main {
+        max-width: 95%;
+    }
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (max-width: 768px) {
+    #Pedidos textarea {
+        width: 50%;
+    }
+
+    #Combos .choose-flavor .descricao span {
+        line-height: 1em;
+    }
+
+    #Combos .choose-flavor-footer {
+        font-size: 0.9em;
+    }
+
+    #Combos .choose-flavor-footer button {
+        padding: 10px 30px;
+    }
+
+    #CriarCupcake span.pag {
+        font-size: 1.2em;
+    }
+
+    #CriarCupcake .main {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    #CriarCupcake .criar-sabor {
+        font-size: 1.1em;
+    }
+
+    #CriarCupcake .criar-sabor .sabor {
+        margin-left: 5px;
+    }
+
+    #CriarCupcake .criar-sabor.divisor {
+        border-right: none;
+    }
+
+    #Contato .highlight-item {
+        font-size: 1.0em;
+    }
+
+    #Contato .contate-nos {
+        display: block;
+    }
+
+    #Contato .contate-nos div {
+        margin: 10px;
+    }
+
+    #Contato .contate-nos p {
+        font-size: 1.0em;
+    }
+
+    #Contato .redes img {
+        margin: 0px 10px;
+    }
+
+    #Beneficios .highlight-item {
+        font-size: 1.0em;
+    }
+
+    #Login .register-block,
+    #Login .login-block {
+        padding: 30px;
+    }
+
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (max-width: 600px) {
+    main {
+        min-width: 300px;
+    }
+    
+    .highlight-container {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    span.pag {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    #Pedidos span.pag,
+    #Combos span.pag,
+    #Carrinho span.pag {
+        left: 50%;
+    }
+    
+    .notification {
+        left: 20%;
+        right: 20%;
+        /* min-width: 245px; */
+    }
+
+    #Pedidos main {
+        min-width: 375px;
+    }
+
+    #Pedidos div.info span {
+        font-size: 0.77em;
+    }
+
+    #Pedidos span.previsao {
+        font-size: 0.9em;
+    }
+
+    #Pedidos .confirmar-entrega h2 {
+        font-size: 1.2em;
+    }
+
+    #Pedidos .qualidades {
+        font-size: 0.8em;
+    }
+
+    #Combos main {
+        max-width: 95%;
+    }
+
+    #Combos .highlight-item {
+        font-size: 0.9em;
+    }
+
+    #Combos .choose-flavor-footer button {
+        padding: 0 10px;
+    }
+
+    #Contato .contate-nos p {
+        font-size: 0.8em;
+    }
+
+    #Login .register-block,
+    #Login .login-block {
+        font-size: 0.9em;
+        padding: 20px;
+    }
+
+    #Carrinho .highlight-item {
+        font-size: 0.9em;
+    }
+
+    #Carrinho .highlight-item-combo {
+        min-width: 270px;
+    }
+
+    #Carrinho .right {
+        left: 307px;
+    }
+    
+    #Carrinho .resumo-carrinho .pag {
+        left: 50%;
+    }
+
+    #Carrinho .highlight-item {
+        font-size: 0.8em;
+    }
+
+    #Carrinho .resumo-carrinho {
+        min-width: auto;
+    }
+
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (min-width: 600px) {
+    
 }

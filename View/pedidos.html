@@ -26,6 +26,7 @@
                 <li><a href="contato.html">Contato</a></li>
                 <li><a href="beneficios.html">Benefícios</a></li>
             </ul>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
             <div class="account-area">
                 <div class="cart-icon">
                     <a href="#" onclick="toggleCart()" ><img src="./assets/carrinhop.png" /></a>
@@ -55,72 +56,74 @@
         <section class="highlight">
             <div class="highlight-container">
                 <span class="pag">Pedidos</span>
-                <div class="highlight-item">
-                    <h2>Pedido em andamento</h2>
-                    <div class="pedido-produtos">
-                        <div class="produto">
-                            <span>Combo pequeno</span>
-                            <span>R$ 54,00</span>
+                <div class="main">
+                    <div class="highlight-item">
+                        <h2>Pedido em andamento</h2>
+                        <div class="pedido-produtos">
+                            <div class="produto">
+                                <span>Combo pequeno</span>
+                                <span>R$ 54,00</span>
+                            </div>
+                            <div class="produto">
+                                <span>Cupcake chocolate</span>
+                                <span>R$ 15,00</span>
+                            </div>
+                            <div class="produto">
+                                <span>Cupcake creme</span>
+                                <span>R$ 24,00</span>
+                            </div>
                         </div>
-                        <div class="produto">
-                            <span>Cupcake chocolate</span>
-                            <span>R$ 15,00</span>
-                        </div>
-                        <div class="produto">
-                            <span>Cupcake creme</span>
-                            <span>R$ 24,00</span>
-                        </div>
-                    </div>
-                    <span>Valor Total: R$ 93,00</span>
-                    <div class="acompanhar-pedido-footer">
-                        <button onclick="acompanharPedido()">Acompanhar pedido</button>
-                    </div>
-                </div>
-                <div class="highlight-item">
-                    <h2>Pedido entregue</h2>
-                    <div class="pedido-produtos">
-                        <div class="produto">
-                            <span>Combo pequeno</span>
-                            <span>R$ 54,00</span>
-                        </div>
-                        <div class="produto">
-                            <span>Cupcake chocolate</span>
-                            <span>R$ 15,00</span>
-                        </div>
-                        <div class="produto">
-                            <span>Cupcake creme</span>
-                            <span>R$ 24,00</span>
+                        <span>Valor Total: R$ 93,00</span>
+                        <div class="acompanhar-pedido-footer">
+                            <button onclick="toggleSecao('acompanhar-pedido')">Acompanhar pedido</button>
                         </div>
                     </div>
-                    <span>Valor Total: R$ 93,00</span>
-                    <div class="acompanhar-pedido-footer">
-                        <a href=""><img src="./assets/plus.png" alt="" width="50px"></a>
+                    <div class="highlight-item">
+                        <h2>Pedido entregue</h2>
+                        <div class="pedido-produtos">
+                            <div class="produto">
+                                <span>Combo pequeno</span>
+                                <span>R$ 54,00</span>
+                            </div>
+                            <div class="produto">
+                                <span>Cupcake chocolate</span>
+                                <span>R$ 15,00</span>
+                            </div>
+                            <div class="produto">
+                                <span>Cupcake creme</span>
+                                <span>R$ 24,00</span>
+                            </div>
+                        </div>
+                        <span>Valor Total: R$ 93,00</span>
+                        <div class="acompanhar-pedido-footer">
+                            <a href=""><img src="./assets/plus.png" alt="" width="50px"></a>
+                        </div>
                     </div>
-                </div>
-                <div class="highlight-item">
-                    <h2>Pedido entregue</h2>
-                    <div class="pedido-produtos">
-                        <div class="produto">
-                            <span>Combo pequeno</span>
-                            <span>R$ 54,00</span>
+                    <div class="highlight-item">
+                        <h2>Pedido entregue</h2>
+                        <div class="pedido-produtos">
+                            <div class="produto">
+                                <span>Combo pequeno</span>
+                                <span>R$ 54,00</span>
+                            </div>
+                            <div class="produto">
+                                <span>Cupcake chocolate</span>
+                                <span>R$ 15,00</span>
+                            </div>
+                            <div class="produto">
+                                <span>Cupcake creme</span>
+                                <span>R$ 24,00</span>
+                            </div>
                         </div>
-                        <div class="produto">
-                            <span>Cupcake chocolate</span>
-                            <span>R$ 15,00</span>
+                        <span>Valor Total: R$ 93,00</span>
+                        <div class="acompanhar-pedido-footer">
+                            <a href=""><img src="./assets/plus.png" alt="" width="50px"></a>
                         </div>
-                        <div class="produto">
-                            <span>Cupcake creme</span>
-                            <span>R$ 24,00</span>
-                        </div>
-                    </div>
-                    <span>Valor Total: R$ 93,00</span>
-                    <div class="acompanhar-pedido-footer">
-                        <a href=""><img src="./assets/plus.png" alt="" width="50px"></a>
                     </div>
                 </div>
                 <!-- Acompanhar pedido -->
                 <div id="AcompanharPedido" class="choose-flavor">
-                    <img class="close" onclick="acompanharPedido()" src="./assets/fechar.png" width="42px">
+                    <img class="close" onclick="toggleSecao('acompanhar-pedido')" src="./assets/fechar.png" width="42px">
                     <div class="acompanhar-pedido">
                         <div class="pagamento">
                             <div>
@@ -143,16 +146,16 @@
                         </div>
                         <div class="confirmar-entrega">
                             <h2>O pedido chegou ao destino</h2>
-                            <button onclick="confirmarEntrega()">Confirmar entrega</button>
+                            <button onclick="toggleSecao('confirmar-entrega')">Confirmar entrega</button>
                         </div>
                     </div>
                 </div>
                 <!-- Avaliar pedido -->
-                <div id="AvaliarPedido" class="choose-flavor">
+                <div id="AvaliarPedido" class="choose-flavor avaliar">
                     <div class="avaliar-pedido">
-                        <img class="close" onclick="fecharAvaliacao()" src="./assets/fechar.png" width="42px">
+                        <img class="close" onclick="toggleSecao('fechar-avaliacao')" src="./assets/fechar.png" width="42px">
                         <h2>Avalise seu pedido</h2>
-                        <div>
+                        <div class="avaliar">
                             <p>O que você achou do pedido ?</p>
                             <small>Escolha de 1 a 5 estrelas para avaliar!</small>
                         </div>
@@ -176,8 +179,8 @@
                                 <span onclick="selecionarQualidade(this)">Bons ingredientes</span>
                             </div>            
                         </div>
-                        <textarea maxlength="200"></textarea>
-                        <button onclick="adicionarAoCarrinho(), fecharAvaliacao()">Enviar avaliação</button>
+                        <textarea maxlength="150"></textarea>
+                        <button onclick="toggleSecao('enviar-avaliacao')">Enviar avaliação</button>
                     </div>
                 </div>
                 <div id="notification" class="notification">Obrigado pela avaliação!</div>

@@ -28,6 +28,7 @@
                 <li><a href="contato.html">Contato</a></li>
                 <li><a href="beneficios.html">Benefícios</a></li>
             </ul>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
             <div class="account-area">
                 <div class="cart-icon">
                     <a href="#" onclick="toggleCart()" ><img src="./assets/carrinhop.png" /></a>
@@ -58,96 +59,99 @@
             <div class="highlight-container">
                 <span class="pag">Combos</span>
 
-                <div class="highlight-item">
-                    <h3>Pequeno</h3>
-                    <div class="sabores">
-                        <img src="./assets/cupcake1m.png" alt="">
-                        <img src="./assets/cupcake1m.png" alt="">
-                        <img src="./assets/cupcake1m.png" alt="">
-                    </div>
-                    <div class="combos-desc">
-                        <span>9x Cupcakes</span>
-                    </div>
-                    <div class="combos-sabores">
-                        <div class="sabor">
-                            <span>R$ 6,00</span>
-                            <span>Morango</span>
+                <div class="main">
+                    <div class="highlight-item">
+                        <h3>Pequeno</h3>
+                        <div class="sabores">
+                            <img src="./assets/cupcake1m.png" alt="">
+                            <img src="./assets/cupcake1m.png" alt="">
+                            <img src="./assets/cupcake1m.png" alt="">
                         </div>
-                        <div class="sabor">
-                            <span>R$ 6,50</span>
-                            <span>Chocolate</span>
+                        <div class="combos-desc">
+                            <span>9x Cupcakes</span>
                         </div>
-                        <div class="sabor">
-                            <span>R$ 7,00</span>
-                            <span>Pistache</span>
+                        <div class="combos-sabores">
+                            <div class="sabor">
+                                <span>R$ 6,00</span>
+                                <span>Morango</span>
+                            </div>
+                            <div class="sabor">
+                                <span>R$ 6,50</span>
+                                <span>Chocolate</span>
+                            </div>
+                            <div class="sabor">
+                                <span>R$ 7,00</span>
+                                <span>Pistache</span>
+                            </div>
                         </div>
+                        <div class="combos-button">
+                            <button onclick="toggleSecao('escolher-sabor')">Escolher sabores</button>
+                        </div>
+                        <small class="desconto">5% de desconto</small>
                     </div>
-                    <div class="combos-button">
-                        <button onclick="escolherSabor()">Escolher sabores</button>
+                    <div class="highlight-item">
+                        <h3>Médio</h3>
+                        <div class="sabores">
+                            <img src="./assets/cupcake1m.png" alt="">
+                            <img src="./assets/cupcake1m.png" alt="">
+                            <img src="./assets/cupcake1m.png" alt="">
+                        </div>
+                        <div class="combos-desc">
+                            <span>15x Cupcakes</span>
+                        </div>
+                        <div class="combos-sabores">
+                            <div class="sabor">
+                                <span>R$ 6,00</span>
+                                <span>Morango</span>
+                            </div>
+                            <div class="sabor">
+                                <span>R$ 6,50</span>
+                                <span>Chocolate</span>
+                            </div>
+                            <div class="sabor">
+                                <span>R$ 7,00</span>
+                                <span>Pistache</span>
+                            </div>
+                        </div>
+                        <div class="combos-button">
+                            <button>Escolher sabores</button>
+                        </div>
+                        <small class="desconto">10% de desconto</small>
                     </div>
-                    <small class="desconto">5% de desconto</small>
+                    <div class="highlight-item">
+                        <h3>Grande</h3>
+                        <div class="sabores">
+                            <img src="./assets/cupcake1m.png" alt="">
+                            <img src="./assets/cupcake1m.png" alt="">
+                            <img src="./assets/cupcake1m.png" alt="">
+                        </div>
+                        <div class="combos-desc">
+                            <span>30x Cupcakes</span>
+                        </div>
+                        <div class="combos-sabores">
+                            <div class="sabor">
+                                <span>R$ 6,00</span>
+                                <span>Morango</span>
+                            </div>
+                            <div class="sabor">
+                                <span>R$ 6,50</span>
+                                <span>Chocolate</span>
+                            </div>
+                            <div class="sabor">
+                                <span>R$ 7,00</span>
+                                <span>Pistache</span>
+                            </div>
+                        </div>
+                        <div class="combos-button">
+                            <button>Escolher sabores</button>
+                        </div>
+                        <small class="desconto">15% de desconto</small>
+                    </div>
                 </div>
-                <div class="highlight-item">
-                    <h3>Médio</h3>
-                    <div class="sabores">
-                        <img src="./assets/cupcake1m.png" alt="">
-                        <img src="./assets/cupcake1m.png" alt="">
-                        <img src="./assets/cupcake1m.png" alt="">
-                    </div>
-                    <div class="combos-desc">
-                        <span>15x Cupcakes</span>
-                    </div>
-                    <div class="combos-sabores">
-                        <div class="sabor">
-                            <span>R$ 6,00</span>
-                            <span>Morango</span>
-                        </div>
-                        <div class="sabor">
-                            <span>R$ 6,50</span>
-                            <span>Chocolate</span>
-                        </div>
-                        <div class="sabor">
-                            <span>R$ 7,00</span>
-                            <span>Pistache</span>
-                        </div>
-                    </div>
-                    <div class="combos-button">
-                        <button>Escolher sabores</button>
-                    </div>
-                    <small class="desconto">10% de desconto</small>
-                </div>
-                <div class="highlight-item">
-                    <h3>Grande</h3>
-                    <div class="sabores">
-                        <img src="./assets/cupcake1m.png" alt="">
-                        <img src="./assets/cupcake1m.png" alt="">
-                        <img src="./assets/cupcake1m.png" alt="">
-                    </div>
-                    <div class="combos-desc">
-                        <span>30x Cupcakes</span>
-                    </div>
-                    <div class="combos-sabores">
-                        <div class="sabor">
-                            <span>R$ 6,00</span>
-                            <span>Morango</span>
-                        </div>
-                        <div class="sabor">
-                            <span>R$ 6,50</span>
-                            <span>Chocolate</span>
-                        </div>
-                        <div class="sabor">
-                            <span>R$ 7,00</span>
-                            <span>Pistache</span>
-                        </div>
-                    </div>
-                    <div class="combos-button">
-                        <button>Escolher sabores</button>
-                    </div>
-                    <small class="desconto">15% de desconto</small>
-                </div>
-                <div id="choose-flavor" class="choose-flavor">
+
+                <div id="EscolherSabor" class="choose-flavor">
                     <h2>Escolha os sabores</h2>
-                    <img class="close" onclick="escolherSabor()" src="./assets/fechar.png" width="42px">
+                    <img class="close" onclick="toggleSecao('escolher-sabor')" src="./assets/fechar.png" width="42px">
                     <div class="combo-sabores">
                         <div class="descricao">
                             <img src="./assets/cupcake1m.png">
@@ -167,15 +171,18 @@
                     </div>
                     <div class="choose-flavor-footer">
                         <span>10 unidades de cada</span>
-                        <button onclick="adicionarAoCarrinho()">Adicionar ao carrinho</button>
+                        <button onclick="adicionarAoCarrinho(), toggleSecao('escolher-sabor')">Adicionar ao carrinho</button>
                         <div>
-                            <span>Valor Total: <s>R$ 210,00</s></span>
+                            <span>
+                                Valor Total: <s>R$ 210,00</s>
+                            </span>
                             <span class="desconto">15% de desconto: R$ 178,50</span>
+                            
                             
                         </div>
                     </div>
-                    <div id="notification" class="notification">Item adicionado ao carrinho!</div>
                 </div>
+                <div id="notification" class="notification">Item adicionado ao carrinho!</div>
             </div>
 
         </section>
