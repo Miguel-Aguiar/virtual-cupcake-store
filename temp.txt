@@ -1,0 +1,19 @@
+(Importante / Proteção) -  Da problema se enviar o adicionar carrinho no front (SEGURANÇA)
+Olhar chatgpt
+
+(Pensar) - adicionar algumas restrições
+
+(Importante) Pente fino no banco de dados, excluir tabelas inúteis.
+Arrumar os valores dos combos
+
+Melhorias:
+get_cart ta chamando direto ao inves de chamar o controller
+
+Posso melhorar muito o login, usar ajax com jquery pra fazer as verificações pra não ficar parado em elas brancas quando der erro.
+
+Arrumar as imagens dos cupcakes
+
+nos controller estou criando varias instancias, provavelmente só precisaria de uma
+
+(Obrigatório) - Montar um arquivo .sql com todos as tabelas e dados obrigatórios
+Ex.: Cupcake, Combo (Provavelmente só essas duas com dados)

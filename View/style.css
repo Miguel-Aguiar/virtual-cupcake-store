@@ -67,8 +67,7 @@ header {
 #Combos a.active,
 #CriarCupcake a.active,
 #Carrinho a.active,
-#Contato a.active,
-#Beneficios a.active {
+#Contato a.active {
     background: #1c1c1c;
     color: white;
     border-radius: 5px;
@@ -145,18 +144,20 @@ img.close:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    text-align: center;
 }
 
 .cart-total {
     font-size: 1.1em;
     font-weight: bold;
-    margin-top: 10px;
+    margin-top: 40px;
 }
 
 div.qtd {
     display: flex;
     justify-content: space-around;
     border: 1px solid black;
+    user-select: none;
 }
 
 div.qtd {
@@ -191,7 +192,21 @@ button.menu-toggle {
     font-size: 1.5rem;
     color: #000;
     cursor: pointer;
-  }
+}
+
+/* Ver se vou precisar ------------------------------------------------------------------------------------------------------------------------ */
+span[data-fulltext] {
+    position: relative;
+}
+
+span[data-fulltext]:hover::after{
+    content: attr(data-fulltext); /* Exibe o texto completo */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #f4f4f4;
+}
 
 /* Vitrine --------------------------------------------------------------------------------------*/
 
@@ -260,7 +275,8 @@ span.pag {
 .notification {
     position: absolute;
     top: -20px;
-    right: 20px;
+    right: 50%;
+    transform: translate(50%);
     background-color: #4CAF50;
     color: white;
     text-align: center;
@@ -302,7 +318,7 @@ footer {
     max-width: 80%;
     /* background-color: #fff; */
     border-radius: 8px;
-    overflow: hidden;
+    /* overflow: hidden; */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     margin: 40px auto;
 }
@@ -352,7 +368,7 @@ footer {
 .register-form input[type="email"],
 .register-form input[type="password"],
 .register-form input[type="text"],
-.register-form input[type="tel"],
+.register-form input[type="number"],
 .register-form select {
     width: 100%;
     padding: 10px;
@@ -360,6 +376,10 @@ footer {
     border: 1px solid #ddd;
     border-radius: 4px;
     margin-bottom: 15px;
+}
+
+input[type="checkbox"]{
+    margin-top: 5px;
 }
 
 .password-note {
@@ -437,6 +457,7 @@ footer {
 .pedido-produtos {
     display: flex;
     flex-wrap: wrap;
+    width: 100%;
 }
 
 .produto {
@@ -500,15 +521,26 @@ button:hover {
 
 .progresso {
     text-align: center;
-    width: 33.3%;
+    width: 33.34%;
     padding: 10px;
+}
+
+.barra-progresso-left,
+.barra-progresso-center,
+.barra-progresso-right {
+    background: linear-gradient(to right, #98c2f8 0%, #98c2f8 100%);
+    background-size: 0% 100%;
+    background-repeat: no-repeat;
+    transition: background-size 1s ease-in-out;
+}
+
+/* Classe para ativar o preenchimento da barra */
+.fill-from-left {
+    background-size: 100% 100%; /* Preenche completamente a barra */
 }
 
 .barra-progresso-left {
     background-color: #98c2f8;
-}
-
-.barra-progresso-left {
     border-top-left-radius: 20px; 
     border-bottom-left-radius: 20px; 
 }
@@ -519,8 +551,8 @@ button:hover {
 }
 
 .barra-progresso-right {
-    border-top-left-radius: 20px; 
-    border-bottom-left-radius: 20px; 
+    border-top-right-radius: 20px; 
+    border-bottom-right-radius: 20px; 
 }
 
 .info {
@@ -539,7 +571,8 @@ span.previsao {
 }
 
 .mapa {
-    display: none;
+    /* display: none; */
+    /* display: block; */
     position: relative;
     bottom: -5px;
     border-top: 1px solid black;
@@ -552,8 +585,8 @@ span.previsao {
 }
 
 .confirmar-entrega {
-    /* display: none; */
-    display: flex;
+    display: none;
+    /* display: flex; */
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
@@ -666,6 +699,7 @@ span.previsao {
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
 }
 
 .choose-flavor.show {
@@ -712,6 +746,7 @@ span.previsao {
 
 .choose-flavor .combo-sabores {
     display: flex;
+    justify-content: center;
 }
 
 .choose-flavor .descricao {
@@ -722,6 +757,7 @@ span.previsao {
     text-align: center;
     margin-bottom: 20px;
     line-height: 1.3em;
+    width: 100%;
 }
 
 .choose-flavor img {
@@ -821,7 +857,8 @@ span.previsao {
 }
 
 .criar-sabor .sabor span {
-    margin-left: 20px;
+    margin-left: 15px;
+    margin-right: 5px;
     padding: 10px;
     border: 1px solid white;
     border-radius: 5px;
@@ -841,13 +878,11 @@ span.previsao {
 
 /* Contato -------------------------------------------------------------------------------------- */
 
-#Contato .highlight-container,
-#Beneficios .highlight-container {
+#Contato .highlight-container {
     display: flex;
 }
 
-#Contato .highlight-item,
-#Beneficios .highlight-item {
+#Contato .highlight-item {
     height: 450px;
     width: 1000px;
     display: flex;
@@ -883,15 +918,20 @@ span.previsao {
 
 /* Carrinho ------------------------------------------------------------------------------------- */
 
+#Carrinho main {
+    max-width: 90%;
+}
+
 #Carrinho .highlight-container {
     display: flex;
+    justify-content: space-between;
     /* width: 1310px; */
     /* padding-right: 440px; */
 }
 
-#Carrinho .highlight-item {
+/* #Carrinho .highlight-item {
     width: auto;
-}
+} */
 
 #Carrinho .carrinho-itens {
     display: flex;
@@ -909,14 +949,15 @@ span.previsao {
     font-size: 1.9em;
     cursor: pointer;
     user-select: none;
+    padding: 0 10px;
 }
 
 #Carrinho .left {
-    left: 11px;
+    left: 0;
 }
 
 #Carrinho .right {
-    right: 400px;
+    right: 415px;
 }
 
 #Carrinho ::-webkit-scrollbar{
@@ -924,11 +965,20 @@ span.previsao {
 }
 
 #Carrinho .highlight-item {
+    position: relative;
     flex: auto;
     height: 350px;
     justify-content: space-around;
 
     min-width: 200px;
+}
+
+#Carrinho .highlight-item .carrinho-item-descricao {
+    display: block;
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 10px;
+    text-align: center;
 }
 
 #Carrinho .highlight-item .sabores img {
@@ -944,8 +994,15 @@ span.previsao {
     min-width: 350px;
 }
 
+#Carrinho .carrinho-itens-qtd-valor{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 #Carrinho .resumo-carrinho .pag{
     left: auto;
+    top: -52px;
 }
 
 #Carrinho .resumo-carrinho {
@@ -955,7 +1012,8 @@ span.previsao {
 
     /* width: 400px;
     height: 390px; */
-    min-width: 350px;
+    min-width: 375px;
+    max-width: 375px;
     display: flex;
     justify-content: space-between;
     padding: 20px;
@@ -968,6 +1026,8 @@ span.previsao {
 
 #Carrinho .resumo {
     width: 100%;
+    overflow-y: auto;
+
 }
 
 #Carrinho .resumo-itens {
@@ -984,7 +1044,8 @@ span.previsao {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 25px;
+    margin-top: 15px;
 }
 
 #Carrinho .qtd {
@@ -993,7 +1054,7 @@ span.previsao {
 
 .fechar-pedido {
     position: absolute;
-    top: -10px;
+    top: -800px;
     left: 0;
     width: 0;
     height: 0;
@@ -1009,8 +1070,11 @@ span.previsao {
 }
 
 .fechar-pedido.show {
+    top: -10px;
     border: 2px solid black;
-    width: 1310px;
+    /* width: 1310px; */
+    width: 100%;
+    /* min-width: 1060px; */
     height: 440px;
     opacity: 1;
 }
@@ -1033,7 +1097,6 @@ span.previsao {
 
 .fechar-pedido div.center {
     border-left: 2px solid #000;
-    border-right: 2px solid #000;
 }
 
 .fechar-pedido .fechar-pedido-passos {
@@ -1041,13 +1104,14 @@ span.previsao {
     flex-direction: column;
     align-items: start;
 
-    width: 33%;
+    width: 50%;
     padding: 10px 20px;
 }
 
 .fechar-pedido .fechar-pedido-passos h1 {
     margin-bottom: 50px;
     align-self: center;
+    font-size: 1.4em;
 }
 
 .fechar-pedido form {
@@ -1080,11 +1144,16 @@ span.previsao {
     display: flex;
 }
 
+.fechar-pedido .input-group div {
+    width: 50%;
+}
+
 .fechar-pedido div.opcao {
     display: flex;
     align-items: center;
     gap: 30px;
     margin-bottom: 20px;
+    cursor: pointer;
 }
 
 .fechar-pedido div.opcao span {
@@ -1108,6 +1177,49 @@ span.previsao {
     justify-content: space-between;
 }
 
+h2.nao_logado {
+    background-color: white;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 20px;
+    border: 2px solid black;
+}
+
+.fechar-pedido-passos .opcao #credito {
+    display: none;
+}
+
+.fechar-pedido-passos .opcao #credito.show {
+    display: block;
+    position: absolute;
+    top: 50px;
+    right: 0px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+}
+
+.fechar-pedido-passos .opcao #credito input{
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.fechar-pedido-passos .opcao #pix {
+    display: none;
+}
+.fechar-pedido-passos .opcao #pix.show {
+    display: block;
+    position: absolute;
+    right: 20px;
+}
+
 /* Media Query */
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
@@ -1118,6 +1230,10 @@ span.previsao {
 
     #Combos .choose-flavor-footer .desconto {
         right: 15px;
+    }
+
+    #Carrinho .fechar-pedido h1 {
+        font-size: 1.2em;
     }
 }
 
@@ -1222,15 +1338,49 @@ span.previsao {
     }
 
     #Carrinho .left {
-        left: 6px;
+        left: -4px;
     }
     
     #Carrinho .right {
-        left: 387px;
+        right: -5px;
     }
 
     #Carrinho main {
         max-width: 95%;
+    }
+
+    #Carrinho .resumo-carrinho {
+        max-width: none;
+    }
+
+    #Carrinho .resumo-carrinho .pag{
+        top: -32px;
+    }
+
+    #Carrinho .fechar-pedido {
+        height: calc(100% + 10px);
+        flex-wrap: wrap;
+    }
+    
+    #Carrinho .fechar-pedido-passos {
+        /* min-width: 309px; */
+        width: 100%;
+        /* align-items: center; */
+        border-right: none;
+        /* border-bottom: 2px solid black; */
+    }
+
+    #Carrinho .fechar-pedido-passos.center {
+        border-left: none;
+        border-top: 2px solid #000;
+    }
+
+    .fechar-pedido-passos.center button {
+        margin-top: 0;
+    }
+
+    .fechar-pedido-passos .opcao #credito.show {
+        top: 480px;
     }
 
 }
@@ -1294,14 +1444,26 @@ span.previsao {
         margin: 0px 10px;
     }
 
-    #Beneficios .highlight-item {
-        font-size: 1.0em;
-    }
-
     #Login .register-block,
     #Login .login-block {
         padding: 30px;
     }
+
+    #Carrinho .fechar-pedido h1 {
+        font-size: 1em;
+    }
+
+    #Carrinho .fechar-pedido-passos {
+        min-width: 276px;
+    }
+
+    #Carrinho .fechar-pedido-passos.last{
+        width: 70%;
+    }
+
+    /* #Carrinho .fechar-pedido-passos.center h1 {
+        align-self: start;
+    } */
 
 }
 
@@ -1327,9 +1489,9 @@ span.previsao {
     }
     
     .notification {
-        left: 20%;
-        right: 20%;
-        /* min-width: 245px; */
+        /* left: 20%;
+        right: 20%; */
+        min-width: 245px;
     }
 
     #Pedidos main {
@@ -1382,10 +1544,6 @@ span.previsao {
         min-width: 270px;
     }
 
-    #Carrinho .right {
-        left: 307px;
-    }
-    
     #Carrinho .resumo-carrinho .pag {
         left: 50%;
     }
@@ -1398,6 +1556,28 @@ span.previsao {
         min-width: auto;
     }
 
+    #Carrinho .resumo-carrinho .pag{
+        top: -40px;
+    }
+
+    #Carrinho .fechar-pedido {
+        /* height: auto; */
+    }
+
+    #Carrinho .fechar-pedido-passos {
+        border-left: none;
+        /* border-bottom: 2px solid #000; */
+        width: 100%;
+        padding-bottom: 15px;
+    }
+
+    #Carrinho .fechar-pedido-passos.center {
+        border-top: 2px solid #000;
+    }
+
+    #Carrinho .fechar-pedido-passos.center h1 {
+        align-self: center;
+    }
 }
 
 /* Extra small devices (phones, 600px and down) */
