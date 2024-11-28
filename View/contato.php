@@ -35,9 +35,7 @@
                 <?php
                     session_start();
 
-                    // Verifica se o usuário está logado
                     if (isset($_SESSION['usuario_id'])) {
-                        // Recupera as variáveis de sessão
                         $usuario_nome = $_SESSION['usuario_nome'];
                         echo "<a href='../Controller/logout.php' class='login-link'>Logout</a>";
                     } else {
@@ -53,6 +51,7 @@
         <img class="close" onclick="toggleCart()" src="./assets/fechar.png" width="42px">
         <?php
         include_once '../Controller/CarrinhoController.php';
+        include_once '../Controller/ComboController.php';
 
         echo "<div class='cart-pedidos'>";
         if (isset($_SESSION['usuario_id'])) {
@@ -60,6 +59,8 @@
 
             $carrinhoController = new CarrinhoController();
             $carrinho = $carrinhoController->exibirCarrinho($userId);
+
+            $comboController = new Combo();
 
             $valorTotal = 0;
             if ($carrinho) {
@@ -70,14 +71,15 @@
                     $quantidade = $item['quantidade'];
 
                     if($tipo == 'cupcake'){
-                        $sabor = htmlspecialchars($item['sabor'], ENT_QUOTES, 'UTF-8'); // Para prevenir XSS
+                        $sabor = htmlspecialchars($item['sabor'], ENT_QUOTES, 'UTF-8');
                     }else if($tipo == 'combo'){
                         $tamanho = $item['tamanho'];
                     }
 
-                    $imagem = $tipo === 'cupcake' ? "./assets/cupcake$sabor.png" : "./assets/combo.png";
-
+                    $imagem = $tipo === 'cupcake' ? "./assets/cupcake$sabor.png" : "./assets/cupcake";
+                    
                     if($tipo == 'cupcake'){
+
                         echo "<div class='cart-pedido'>
                             <img src='$imagem'>
                             <span>R$ $preco <br> $sabor</span>
@@ -88,8 +90,15 @@
                             </div>
                         </div>";
                     }else if ($tipo == 'combo'){
+                        $combo = $comboController->readCombo($item['id']);
+                        $sabores = explode(', ', $combo['sabores']);
+                        
                         echo "<div class='cart-pedido'>
-                            <img src='$imagem'>
+                            <div class='cart-pedido-combo'>
+                                <img src='$imagem$sabores[0].png' width='24px'>
+                                <img src='$imagem$sabores[1].png' width='24px'>
+                                <img src='$imagem$sabores[2].png' width='24px'>
+                            </div>
                             <span>R$ $preco <br> Combo $tamanho</span>
                             <div class='qtd'>
                                 <div onclick=\"adicionarAoCarrinho('$tipo', $id, 'diminuir')\">-</div>
@@ -102,7 +111,7 @@
 
                     $valorTotal += $item['preco'] * $item['quantidade'];
                 }
-                echo "</div>"; // Fecha cart-pedidos
+                echo "</div>";
 
                 echo "
                 <p class='cart-total'>Valor total: R$ " . number_format($valorTotal, 2, ',', '.') . "</p>

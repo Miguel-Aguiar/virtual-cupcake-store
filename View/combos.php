@@ -40,9 +40,8 @@
                         $userRestricoes = $_SESSION['usuario_restricoes'];
                     }
 
-                    // Verifica se o usuário está logado
                     if (isset($_SESSION['usuario_id'])) {
-                        // Recupera as variáveis de sessão
+
                         $usuario_nome = $_SESSION['usuario_nome'];
                         echo "<a href='../Controller/logout.php' class='login-link'>Logout</a>";
                     } else {
@@ -59,6 +58,7 @@
         
         <?php
         include_once '../Controller/CarrinhoController.php';
+        include_once '../Controller/ComboController.php';
 
         echo "<div class='cart-pedidos'>";
         if (isset($_SESSION['usuario_id'])) {
@@ -66,6 +66,8 @@
 
             $carrinhoController = new CarrinhoController();
             $carrinho = $carrinhoController->exibirCarrinho($userId);
+
+            $comboController = new Combo();
 
             $valorTotal = 0;
             if ($carrinho) {
@@ -76,14 +78,15 @@
                     $quantidade = $item['quantidade'];
 
                     if($tipo == 'cupcake'){
-                        $sabor = htmlspecialchars($item['sabor'], ENT_QUOTES, 'UTF-8'); // Para prevenir XSS
+                        $sabor = htmlspecialchars($item['sabor'], ENT_QUOTES, 'UTF-8');
                     }else if($tipo == 'combo'){
                         $tamanho = $item['tamanho'];
                     }
 
-                    $imagem = $tipo === 'cupcake' ? "./assets/cupcake$sabor.png" : "./assets/combo.png";
-
+                    $imagem = $tipo === 'cupcake' ? "./assets/cupcake$sabor.png" : "./assets/cupcake";
+                    
                     if($tipo == 'cupcake'){
+
                         echo "<div class='cart-pedido'>
                             <img src='$imagem'>
                             <span>R$ $preco <br> $sabor</span>
@@ -94,8 +97,15 @@
                             </div>
                         </div>";
                     }else if ($tipo == 'combo'){
+                        $combo = $comboController->readCombo($item['id']);
+                        $sabores = explode(', ', $combo['sabores']);
+                        
                         echo "<div class='cart-pedido'>
-                            <img src='$imagem'>
+                            <div class='cart-pedido-combo'>
+                                <img src='$imagem$sabores[0].png' width='24px'>
+                                <img src='$imagem$sabores[1].png' width='24px'>
+                                <img src='$imagem$sabores[2].png' width='24px'>
+                            </div>
                             <span>R$ $preco <br> Combo $tamanho</span>
                             <div class='qtd'>
                                 <div onclick=\"adicionarAoCarrinho('$tipo', $id, 'diminuir')\">-</div>
@@ -108,7 +118,7 @@
 
                     $valorTotal += $item['preco'] * $item['quantidade'];
                 }
-                echo "</div>"; // Fecha cart-pedidos
+                echo "</div>";
 
                 echo "
                 <p class='cart-total'>Valor total: R$ " . number_format($valorTotal, 2, ',', '.') . "</p>
@@ -149,14 +159,18 @@
                             if($restricao) $restricaoComum = "<small style='color:red;'>Contém: $restricao</small>";
                             else $restricaoComum = '';
 
+                            $precos = explode(',', $combo['precosCupcakes']);
+                            $sabores = explode(', ', $combo['sabores']);
                             echo "<div class='highlight-item'";
                             echo "<h3>" . $combo['tamanho'] . "</h3>";
-                            
-                            echo "<div class='sabores'>";
-                            echo "<img src='./assets/cupcake1m.png'>
-                                    <img src='./assets/cupcake1m.png'>
-                                    <img src='./assets/cupcake1m.png'>";
-                            echo "</div>";
+
+                            echo "
+                                <div class='sabores'>
+                                <img src='./assets/cupcake$sabores[0].png'>
+                                    <img src='./assets/cupcake$sabores[1].png'>
+                                    <img src='./assets/cupcake$sabores[2].png'>
+                                </div>
+                            ";
                             
                             echo "<div class='combos-desc'>";
                             $tamanho = strtolower(trim($combo['tamanho']));
@@ -165,8 +179,7 @@
 
                             echo "<div class='combos-sabores'>";
                             
-                            $precos = explode(',', $combo['precosCupcakes']);
-                            $sabores = explode(',', $combo['sabores']);
+                            
                             
                             $valorTotal = 0;
                             for ($i=0; $i < 3; $i++) { 
@@ -199,81 +212,6 @@
                         }
                     ?>
                 </div>
-
-                <!-- <div id="EscolherSabor" class="choose-flavor">
-                    <h2><?= "Combo $tamanho" ?></h2>
-                    <img class="close" onclick="toggleSecao('escolher-sabor')" src="./assets/fechar.png" width="42px">
-                    <div class="combo-sabores">
-                        <div class="descricao">
-                            <img src="./assets/cupcake1m.png">
-                            <span>R$ 7,00</span>
-                            <span>Cupcake de baunilha com recheio e cobertura de chocolate</span>
-                        </div>
-                        <div class="descricao">
-                            <img src="./assets/cupcake1m.png">
-                            <span>R$ 7,00</span>
-                            <span>Cupcake de baunilha com recheio e cobertura de chocolate</span>
-                        </div>
-                        <div class="descricao">
-                            <img src="./assets/cupcake1m.png">
-                            <span>R$ 7,00</span>
-                            <span>Cupcake de baunilha com recheio e cobertura de chocolate</span>
-                        </div>
-
-                        <?php
-                        include_once '../Controller/CupcakeController.php';
-
-                        $tamanho = 'pequeno';
-                        $saborPrecos;
-                        $saborDescricoes;
-
-                        switch ($tamanho) {
-                            case 'pequeno':
-                                $saborPrecos = $combos[0]['precosCupcakes'];
-                                $saborDescricoes = $combos[0]['descricoes'];
-                                break;
-                            case 'médio':
-                                $saborPrecos = $combos[1]['precosCupcakes'];
-                                $saborDescricoes = $combos[1]['descricoes'];
-                                break;
-                            case 'grande':
-                                $saborPrecos = $combos[1]['precosCupcakes'];
-                                $saborDescricoes = $combos[1]['descricoes'];
-                                break;
-                            
-                            default:
-                                break;
-                        }
-
-                        $saborDescricao = explode('.', $saborDescricoes);
-                        $saborPreco = explode(',', $saborPrecos);
-
-                        for ($i=0; $i < 3; $i++) { 
-                            echo "
-                                <div class='descricao'>
-                                    <img src='./assets/cupcake1m.png'>
-                                    <span>R$ " . $saborPreco[$i] . "</span>
-                                    <span>" . $saborDescricao[$i] . "</span>
-                                </div>
-                            ";
-                        }
-                        
-                        ?>
-                        
-                    </div>
-                    <div class="choose-flavor-footer">
-                        <span>10 unidades de cada</span>
-                        <button onclick="adicionarAoCarrinho(), toggleSecao('escolher-sabor')">Adicionar ao carrinho</button>
-                        <div>
-                            <span>
-                                Valor Total: <s>R$ 210,00</s>
-                            </span>
-                            <span class="desconto">15% de desconto: R$ 178,50</span>
-                            
-                            
-                        </div>
-                    </div>
-                </div> -->
                 <div id="notification" class="notification">Item adicionado ao carrinho!</div>
             </div>
 

@@ -46,8 +46,6 @@ header {
     list-style-type: none;
     display: flex;
     gap: 10px;
-    /* position: relative;
-    left: 30px; */
 }
 
 .menu li a {
@@ -104,7 +102,7 @@ header {
     position: fixed;
     top: 0;
     right: -100%;
-    width: 33%;
+    width: 100%;
     max-width: 400px;
     height: 100%;
     background-color: #f4f4f4;
@@ -147,6 +145,14 @@ img.close:hover {
     text-align: center;
 }
 
+.cart-pedido img {
+    width: 72px;
+}
+
+.cart-pedido-combo img {
+    width: 24px;
+}
+
 .cart-total {
     font-size: 1.1em;
     font-weight: bold;
@@ -184,7 +190,7 @@ div.qtd div.center:hover {
 }
 
 button.menu-toggle {
-    display: none; /* Esconde o botão no desktop */
+    display: none;
     background: none;
     border: none;
     border-radius: 10px;
@@ -194,14 +200,8 @@ button.menu-toggle {
     cursor: pointer;
 }
 
-/* Ver se vou precisar ------------------------------------------------------------------------------------------------------------------------ */
-span[data-fulltext] {
-    position: relative;
-}
-
 span[data-fulltext]:hover::after{
-    content: attr(data-fulltext); /* Exibe o texto completo */
-    position: absolute;
+    content: attr(data-fulltext);
     top: 0;
     left: 0;
     right: 0;
@@ -306,19 +306,12 @@ footer {
     font-size: 1em;
 }
 
-/* #Login .footer {
-    position: relative;
-} */
-
 /* Login ----------------------------------------------------------------------------------------*/
 
 .auth-container {
     display: flex;
-    /* max-width: 1200px; */
     max-width: 80%;
-    /* background-color: #fff; */
     border-radius: 8px;
-    /* overflow: hidden; */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     margin: 40px auto;
 }
@@ -534,9 +527,8 @@ button:hover {
     transition: background-size 1s ease-in-out;
 }
 
-/* Classe para ativar o preenchimento da barra */
 .fill-from-left {
-    background-size: 100% 100%; /* Preenche completamente a barra */
+    background-size: 100% 100%;
 }
 
 .barra-progresso-left {
@@ -571,8 +563,6 @@ span.previsao {
 }
 
 .mapa {
-    /* display: none; */
-    /* display: block; */
     position: relative;
     bottom: -5px;
     border-top: 1px solid black;
@@ -586,7 +576,6 @@ span.previsao {
 
 .confirmar-entrega {
     display: none;
-    /* display: flex; */
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
@@ -599,7 +588,6 @@ span.previsao {
 }
 
 .avaliar-pedido {
-    /* width: 100%; */
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -664,8 +652,6 @@ span.previsao {
 }
 
 /* Combos -------------------------------------------------------------------------------------- */
-
-
 
 #Combos .highlight-item {
     align-items: center;
@@ -740,10 +726,6 @@ span.previsao {
     top: 5px;
 }
 
-.choose-flavor h2 {
-    /* margin-bottom: 20px; */
-}
-
 .choose-flavor .combo-sabores {
     display: flex;
     justify-content: center;
@@ -788,10 +770,6 @@ span.previsao {
     font-weight: bold;
 }
 
-.choose-flavor .notification {
-    /* right: 60px; */
-}
-
 /* Crie seu Cupcake ----------------------------------------------------------------------------- */
 
 #CriarCupcake .highlight-container {
@@ -803,13 +781,11 @@ span.previsao {
 #CriarCupcake .main {
     width: 100%;
     gap: 0;
-    /* flex-direction: row; */
     flex-wrap: nowrap;
 }
 
 #CriarCupcake .highlight-item {
     flex-direction: column;
-    /* align-items: flex-start; */
     width: 100%;
     height: 100%;
 }
@@ -828,9 +804,7 @@ span.previsao {
 }
 
 .criar-sabor {
-    /* width: 320px; */
     width: 100%;
-    /* height: 350px; */
     padding: 20px;
     font-size: 1.2em;
 }
@@ -909,13 +883,6 @@ span.previsao {
     scale: 1.1;
 }
 
-/* Benefícios ----------------------------------------------------------------------------------- */
-
-.premios p {
-    margin-bottom: 20px;
-    font-size: 1.1em;
-}
-
 /* Carrinho ------------------------------------------------------------------------------------- */
 
 #Carrinho main {
@@ -925,18 +892,11 @@ span.previsao {
 #Carrinho .highlight-container {
     display: flex;
     justify-content: space-between;
-    /* width: 1310px; */
-    /* padding-right: 440px; */
 }
-
-/* #Carrinho .highlight-item {
-    width: auto;
-} */
 
 #Carrinho .carrinho-itens {
     display: flex;
     gap: 40px;
-    /* width: 830px; */
     overflow-x: auto;
 
     scrollbar-width: none;
@@ -1006,18 +966,11 @@ span.previsao {
 }
 
 #Carrinho .resumo-carrinho {
-    /* position: absolute;
-    top: 0;
-    right: 0; */
-
-    /* width: 400px;
-    height: 390px; */
     min-width: 375px;
     max-width: 375px;
     display: flex;
     justify-content: space-between;
     padding: 20px;
-    /* padding-top: 45px; */
 
     border: 1px solid #cdcdcd;
     border-radius: 50px;
@@ -1062,7 +1015,6 @@ span.previsao {
     border-radius: 20px;
     font-size: 1.2em;
     opacity: 0;
-    /* padding: 10px 20px; */
     transition: opacity 0.5s ease, width 0.5s ease, height 0.5s ease;
 
     display: flex;
@@ -1072,9 +1024,7 @@ span.previsao {
 .fechar-pedido.show {
     top: -10px;
     border: 2px solid black;
-    /* width: 1310px; */
     width: 100%;
-    /* min-width: 1060px; */
     height: 440px;
     opacity: 1;
 }
@@ -1224,9 +1174,6 @@ h2.nao_logado {
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (max-width: 1200px) {
-    footer {
-        /* position: relative; */
-    }
 
     #Combos .choose-flavor-footer .desconto {
         right: 15px;
@@ -1249,10 +1196,10 @@ h2.nao_logado {
     }
 
     ul.menu {
-        display: none; /* Esconde os links do menu */
+        display: none;
         flex-direction: column;
         position: absolute;
-        top: 0px; /* Ajuste conforme necessário */
+        top: 0px;
         right: -5px;
         left: 70%;
         bottom: auto;
@@ -1268,11 +1215,11 @@ h2.nao_logado {
     }
 
     ul.menu.active {
-        display: flex; /* Mostra o menu quando clicado */
+        display: flex;
     }
 
     button.menu-toggle {
-        display: block; /* Exibe o botão no mobile */
+        display: block;
     }
 
     main {
@@ -1317,7 +1264,6 @@ h2.nao_logado {
     }
 
     #Login .login-block {
-        /* border-top: 1px solid black; */
         margin-top: 50px;
     }
 
@@ -1363,11 +1309,8 @@ h2.nao_logado {
     }
     
     #Carrinho .fechar-pedido-passos {
-        /* min-width: 309px; */
         width: 100%;
-        /* align-items: center; */
         border-right: none;
-        /* border-bottom: 2px solid black; */
     }
 
     #Carrinho .fechar-pedido-passos.center {
@@ -1387,6 +1330,7 @@ h2.nao_logado {
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (max-width: 768px) {
+    
     #Pedidos textarea {
         width: 50%;
     }
@@ -1461,14 +1405,11 @@ h2.nao_logado {
         width: 70%;
     }
 
-    /* #Carrinho .fechar-pedido-passos.center h1 {
-        align-self: start;
-    } */
-
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (max-width: 600px) {
+
     main {
         min-width: 300px;
     }
@@ -1489,8 +1430,6 @@ h2.nao_logado {
     }
     
     .notification {
-        /* left: 20%;
-        right: 20%; */
         min-width: 245px;
     }
 
@@ -1560,13 +1499,8 @@ h2.nao_logado {
         top: -40px;
     }
 
-    #Carrinho .fechar-pedido {
-        /* height: auto; */
-    }
-
     #Carrinho .fechar-pedido-passos {
         border-left: none;
-        /* border-bottom: 2px solid #000; */
         width: 100%;
         padding-bottom: 15px;
     }
@@ -1578,9 +1512,4 @@ h2.nao_logado {
     #Carrinho .fechar-pedido-passos.center h1 {
         align-self: center;
     }
-}
-
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (min-width: 600px) {
-    
 }

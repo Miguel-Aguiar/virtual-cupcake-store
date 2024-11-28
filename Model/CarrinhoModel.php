@@ -4,17 +4,20 @@
     class Carrinho {
         private $db;
         private $conn;
-        private $table = 'carrinho';
 
         public function __construct() {
             $this->db = new Database();
             $this->conn = $this->db->connect();
         }
 
+        public function __destruct() {
+            $this->db->close();
+        }
+
         public function exibirCarrinho($userId) {
             $carrinhoId = $this->getCarrinho($userId);
         
-            // Consulta cupcakes no carrinho
+            
             $sqlCupcakes = "
                 SELECT
                     'cupcake' AS tipo,
@@ -33,7 +36,6 @@
                     carrinho_cupcake.idCarrinho = $carrinhoId;
             ";
         
-            // Consulta combos no carrinho
             $sqlCombos = "
                 SELECT
                     'combo' AS tipo,
@@ -54,7 +56,7 @@
             $resultCupcakes = $this->conn->query($sqlCupcakes);
             $resultCombos = $this->conn->query($sqlCombos);
         
-            // Combina os resultados de cupcakes e combos
+            
             $itens = [];
         
             if ($resultCupcakes && $resultCupcakes->num_rows > 0) {
@@ -75,7 +77,7 @@
 
         public function adicionarAoCarrinho($userId, $itemId, $tipo, $operacao = 'adicionar') {
             try {
-                // Validações básicas
+                
                 if (!in_array($tipo, ['cupcake', 'combo'])) {
                     throw new Exception("Tipo inválido: $tipo");
                 }
@@ -83,18 +85,18 @@
                 if (!in_array($operacao, ['adicionar', 'diminuir'])) {
                     throw new Exception("Operação inválida: $operacao");
                 }
-        
-                // Obtém o ID do carrinho
+                
+                
                 $carrinhoId = $this->getCarrinho($userId);
                 if (!$carrinhoId) {
                     throw new Exception("Carrinho não encontrado para o usuário: $userId");
                 }
         
-                // Determina a tabela e a coluna com base no tipo
+                
                 $tabela = $tipo === 'cupcake' ? 'carrinho_cupcake' : 'carrinho_combo';
                 $colunaId = $tipo === 'cupcake' ? 'idCupcake' : 'idCombo';
         
-                // Verifica se o item já existe no carrinho
+                
                 $sql = "SELECT $colunaId, quantidade FROM $tabela WHERE idCarrinho = ? AND $colunaId = ?";
                 $stmt = $this->conn->prepare($sql);
                 $stmt->bind_param("ii", $carrinhoId, $itemId);
@@ -102,7 +104,7 @@
                 $result = $stmt->get_result();
         
                 if ($result->num_rows > 0) {
-                    // Item já está no carrinho
+                    
                     $row = $result->fetch_assoc();
                     $quantidadeAtual = $row['quantidade'];
         
@@ -113,13 +115,13 @@
                     }
         
                     if ($novaQuantidade > 0) {
-                        // Atualiza a quantidade
+                        
                         $sqlUpdate = "UPDATE $tabela SET quantidade = ? WHERE idCarrinho = ? AND $colunaId = ?";
                         $stmtUpdate = $this->conn->prepare($sqlUpdate);
                         $stmtUpdate->bind_param("iii", $novaQuantidade, $carrinhoId, $itemId);
                         $stmtUpdate->execute();
                     } else {
-                        // Remove o item do carrinho
+                        
                         $sqlDelete = "DELETE FROM $tabela WHERE idCarrinho = ? AND $colunaId = ?";
                         $stmtDelete = $this->conn->prepare($sqlDelete);
                         $stmtDelete->bind_param("ii", $carrinhoId, $itemId);
@@ -127,7 +129,7 @@
                     }
                 } else {
                     if ($operacao === 'adicionar') {
-                        // Adiciona o item ao carrinho
+                        
                         $sqlInsert = "INSERT INTO $tabela (idCarrinho, $colunaId, quantidade) VALUES (?, ?, 1)";
                         $stmtInsert = $this->conn->prepare($sqlInsert);
                         $stmtInsert->bind_param("ii", $carrinhoId, $itemId);
@@ -231,48 +233,92 @@
                 $db = new Database();
                 $conn = $db->connect();
             
-                // Iniciar transação (opcional para garantir consistência)
                 $conn->begin_transaction();
             
-                // Deletar cupcakes do carrinho
                 $sqlCupcake = "DELETE FROM carrinho_cupcake WHERE idCarrinho IN (SELECT idCarrinho FROM carrinho WHERE idCliente = ?)";
                 $stmtCupcake = $conn->prepare($sqlCupcake);
                 $stmtCupcake->bind_param("i", $usuario);
                 $stmtCupcake->execute();
             
-                // Deletar combos do carrinho
                 $sqlCombo = "DELETE FROM carrinho_combo WHERE idCarrinho IN (SELECT idCarrinho FROM carrinho WHERE idCliente = ?)";
                 $stmtCombo = $conn->prepare($sqlCombo);
                 $stmtCombo->bind_param("i", $usuario);
                 $stmtCombo->execute();
             
-                // Confirmar transação
                 $conn->commit();
             
                 echo json_encode(['success' => true, 'message' => 'Carrinho foi limpo com sucesso!']);
                 exit;
             } catch (Exception $e) {
-                // Reverter transação em caso de erro
+                
                 $conn->rollback();
                 echo "Erro ao limpar o carrinho: " . $e->getMessage();
             }
+        }
+
+        public function getCart($userId){
+            
+            $sql = "SELECT
+                'cupcake' AS tipo,                      
+                c.idCupcake AS id,                      
+                c.quantidade,                           
+                cp.sabor AS descricao,                  
+                cp.preco,                               
+                NULL AS sabores                         
+            FROM
+                carrinho_cupcake c
+            JOIN
+                cupcake cp
+            ON
+                c.idCupcake = cp.idCupcake
+            WHERE
+                c.idCarrinho = (SELECT idCarrinho FROM carrinho WHERE idCliente = ?)
+
+            UNION ALL
+
+            SELECT
+                'combo' AS tipo,                        
+                cb.idCombo AS id,                       
+                cb.quantidade,                          
+                CONCAT('Combo ', co.tamanho) AS descricao, 
+                co.preco,                               
+                GROUP_CONCAT(cup.sabor SEPARATOR ', ') AS sabores 
+            FROM
+                carrinho_combo cb
+            JOIN
+                combo co
+            ON
+                cb.idCombo = co.idCombo
+            JOIN
+                combo_cupcake cc                        
+            ON
+                cc.idCombo = cb.idCombo
+            JOIN
+                cupcake cup
+            ON
+                cc.idCupcake = cup.idCupcake
+            WHERE
+                cb.idCarrinho = (SELECT idCarrinho FROM carrinho WHERE idCliente = ?)
+            GROUP BY
+                cb.idCombo, cb.quantidade, co.tamanho, co.preco;
+            ";
+
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("ii", $userId, $userId);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            $itens = [];
+            while ($row = $result->fetch_assoc()) {
+                $itens[] = $row;
+            }
+
+            echo json_encode(['success' => true, 'itens' => $itens]);
+            exit;
         }
 
         public function closeConnection() {
             $this->db->close();
         }
     }
-
-
-    $carrinho = new Carrinho();
-    // $resultado = $cupcakes->readAll();
-
-    // foreach ($resultado as $r) {
-    //     echo "Id: " . $r['idCupcake'] . '<br>';
-    //     echo "Sabor: " . $r['sabor'] . '<br>';
-    //     echo "Descricao: " . $r['descricao'] . '<br>';
-    //     echo "Preco: " . $r['preco'] . '<br>';
-    // }
-
-    $carrinho->closeConnection();
 ?>

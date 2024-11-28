@@ -34,9 +34,8 @@
                 <?php
                     session_start();
 
-                    // Verifica se o usuário está logado
                     if (isset($_SESSION['usuario_id'])) {
-                        // Recupera as variáveis de sessão
+                        
                         $usuario_nome = $_SESSION['usuario_nome'];
                         echo "<a href='../Controller/logout.php' class='login-link'>Logout</a>";
                     } else {
@@ -53,6 +52,7 @@
         <img class="close" onclick="toggleCart()" src="./assets/fechar.png" width="42px">
         <?php
         include_once '../Controller/CarrinhoController.php';
+        include_once '../Controller/ComboController.php';
 
         echo "<div class='cart-pedidos'>";
         if (isset($_SESSION['usuario_id'])) {
@@ -60,6 +60,8 @@
 
             $carrinhoController = new CarrinhoController();
             $carrinho = $carrinhoController->exibirCarrinho($userId);
+
+            $comboController = new Combo();
 
             $valorTotal = 0;
             if ($carrinho) {
@@ -70,14 +72,15 @@
                     $quantidade = $item['quantidade'];
 
                     if($tipo == 'cupcake'){
-                        $sabor = htmlspecialchars($item['sabor'], ENT_QUOTES, 'UTF-8'); // Para prevenir XSS
+                        $sabor = htmlspecialchars($item['sabor'], ENT_QUOTES, 'UTF-8');
                     }else if($tipo == 'combo'){
                         $tamanho = $item['tamanho'];
                     }
 
-                    $imagem = $tipo === 'cupcake' ? "./assets/cupcake$sabor.png" : "./assets/combo.png";
-
+                    $imagem = $tipo === 'cupcake' ? "./assets/cupcake$sabor.png" : "./assets/cupcake";
+                    
                     if($tipo == 'cupcake'){
+
                         echo "<div class='cart-pedido'>
                             <img src='$imagem'>
                             <span>R$ $preco <br> $sabor</span>
@@ -88,8 +91,15 @@
                             </div>
                         </div>";
                     }else if ($tipo == 'combo'){
+                        $combo = $comboController->readCombo($item['id']);
+                        $sabores = explode(', ', $combo['sabores']);
+                        
                         echo "<div class='cart-pedido'>
-                            <img src='$imagem'>
+                            <div class='cart-pedido-combo'>
+                                <img src='$imagem$sabores[0].png' width='24px'>
+                                <img src='$imagem$sabores[1].png' width='24px'>
+                                <img src='$imagem$sabores[2].png' width='24px'>
+                            </div>
                             <span>R$ $preco <br> Combo $tamanho</span>
                             <div class='qtd'>
                                 <div onclick=\"adicionarAoCarrinho('$tipo', $id, 'diminuir')\">-</div>
@@ -102,7 +112,7 @@
 
                     $valorTotal += $item['preco'] * $item['quantidade'];
                 }
-                echo "</div>"; // Fecha cart-pedidos
+                echo "</div>";
 
                 echo "
                 <p class='cart-total'>Valor total: R$ " . number_format($valorTotal, 2, ',', '.') . "</p>
@@ -143,9 +153,6 @@
                         }else if($pedidos == null){
                             echo "<h2 class='nao_logado'>Você ainda não fez nenhum pedido!</h2>";
                         }else {
-
-                            // $controller = new PedidoController();                        
-                            // $pedidos = $controller->readAll($idCliente);
     
                             foreach ($pedidos as $pedido) {
                                 $valorPedido = 0;
@@ -156,7 +163,6 @@
                                 echo "</h2>";
                                 echo "<div class='pedido-produtos'>";
     
-                                // Processar cupcakes
                                 if($pedido['cupcakes']){
                                     $cupcakes = explode('|', $pedido['cupcakes']);
 
@@ -171,7 +177,6 @@
                                     }
                                 }
 
-                                // Processar combos
                                 if($pedido['combos']){
                                     $combos = explode('|', $pedido['combos']);
                                     foreach ($combos as $combo) {
@@ -186,24 +191,24 @@
                                 }
     
     
-                                echo "</div>"; // fecha pedido-produtos
+                                echo "</div>"; 
                                 echo "<span>Valor Total: R$" . number_format($valorPedido, 2, ',', '.') . "</span>";
                                 echo "<div class='acompanhar-pedido-footer'>";
                                 
                                 if($pedido['status'] == 'pendente') {
-                                    echo "<button onclick=\"toggleSecao('acompanhar-pedido')\">Acompanhar pedido</button>";
+                                    echo "<button class='acompanhar-pedido-footer-button' onclick=\"toggleSecao('acompanhar-pedido')\">Acompanhar pedido</button>";
                                 }else {
                                     echo "<a href='#' onclick=\"repetirPedido($pedido[idPedido])\"><img src='./assets/plus.png' width='50px'></a>";
                                 }
     
                                 echo "</div>";
-                                echo "</div>"; // fecha highlight-item
+                                echo "</div>";
                             }
                         }
                         
                     ?>
                 </div>
-                <!-- Acompanhar pedido -->
+                
                 <div id="AcompanharPedido" class="choose-flavor">
                     <img class="close" onclick="toggleSecao('acompanhar-pedido')" src="./assets/fechar.png" width="42px">
                     <div class="acompanhar-pedido">
@@ -232,7 +237,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- Avaliar pedido -->
+                
                 <div id="AvaliarPedido" class="choose-flavor avaliar">
                     <div class="avaliar-pedido">
                         <img class="close" onclick="toggleSecao('fechar-avaliacao')" src="./assets/fechar.png" width="42px">

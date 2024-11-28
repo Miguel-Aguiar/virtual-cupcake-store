@@ -3,16 +3,15 @@ function validarSenhas(event) {
     const confirmarSenha = document.getElementById("confirm-password").value;
 
     if (senha !== confirmarSenha) {
-        event.preventDefault(); // Impede o envio do formulário
+        event.preventDefault();
         alert("As senhas não conferem. Por favor, tente novamente.");
         return false;
     }
 
-    return true; // Permite o envio se as senhas conferirem
+    return true;
 }
 
 function adicionarAoCarrinho(tipo, id, operacao) {
-    // Faz uma requisição AJAX para o PHP
 
     const itemId = id;
     const tipoProduto = tipo;
@@ -26,21 +25,23 @@ function adicionarAoCarrinho(tipo, id, operacao) {
     })
     .then(response => response.json())
     .then(data => {
-        // console.log(data.message);
         
         if (data.success) {
-            // alert('Item adicionado ao carrinho com sucesso!');
             if(data.message == 'adicionar'){
                 exibirNotificacao();
             }
-            atualizarCarrinho(); // Atualizar o carrinho na interface
+            atualizarCarrinho();
         } else {
-            alert('Erro ao adicionar o item ao carrinho. ' + data.message);
+            if(data.message == 'Você precisa estar logado para adicionar itens ao carrinho.'){
+                exibirNotificacao('aviso');
+            }else {
+                alert('Erro ao adicionar o item ao carrinho. ' + data.message);
+            }
         }
     })
     .catch(error => {
         console.error('Erro: ', error);
-        exibirNotificacao('aviso');
+        // exibirNotificacao('aviso');
     });
 }
 
@@ -80,11 +81,14 @@ function repetirPedido(idPedido){
 
 function atualizarCarrinho() {
     
-    fetch('../Controller/get_cart.php')  // Este arquivo PHP vai retornar os itens do carrinho
+    fetch('../Controller/get_cart.php')
         .then(response => response.json())
         .then(data => {
 
             const cartPedidos = document.querySelector('.cart-pedidos');
+            const combos = document.querySelectorAll('div.sabores');
+            
+            
             cartPedidos.innerHTML = '';
 
             let carrinho;
@@ -102,20 +106,43 @@ function atualizarCarrinho() {
                 }
                 
                 carrinhoItensIterator = 0;
+                i = 0;
+
                 data.itens.forEach(item => {
                     
                     const itemElement = document.createElement('div');
                     itemElement.classList.add('cart-pedido');
+                    
+                    if(item.tipo == 'cupcake'){
+                        
+                        itemElement.innerHTML = `
+                            <img src=./assets/cupcake${item.descricao}.png>
+                            <span>R$ ${formatNumber(item.preco)} <br> ${item.descricao}</span>
+                            <div class='qtd'>
+                                <div onclick="adicionarAoCarrinho('${item.tipo}', ${item.id}, 'diminuir')">-</div>
+                                <div class='center'>${item.quantidade}</div>
+                                <div onclick="adicionarAoCarrinho('${item.tipo}', ${item.id}, 'adicionar')">+</div>
+                            </div>
+                        `;
+                    }else if(item.tipo == 'combo'){
 
-                    itemElement.innerHTML = `
-                        <img src=./assets/cupcake.png'>
-                        <span>R$ ${formatNumber(item.preco)} <br> ${item.sabor}</span>
-                        <div class='qtd'>
-                            <div onclick="adicionarAoCarrinho('${item.tipo}', ${item.id}, 'diminuir')">-</div>
-                            <div class='center'>${item.quantidade}</div>
-                            <div onclick="adicionarAoCarrinho('${item.tipo}', ${item.id}, 'adicionar')">+</div>
+                        let sabor = item.sabores.split(', ')
+
+                        itemElement.innerHTML = `
+                        <div class="cart-pedido-combo">
+                            <img src=./assets/cupcake${sabor[0]}.png>
+                            <img src=./assets/cupcake${sabor[1]}.png>
+                            <img src=./assets/cupcake${sabor[2]}.png>
                         </div>
-                    `;
+                            <span>R$ ${formatNumber(item.preco)} <br> ${item.descricao}</span>
+                            <div class='qtd'>
+                                <div onclick="adicionarAoCarrinho('${item.tipo}', ${item.id}, 'diminuir')">-</div>
+                                <div class='center'>${item.quantidade}</div>
+                                <div onclick="adicionarAoCarrinho('${item.tipo}', ${item.id}, 'adicionar')">+</div>
+                            </div>
+                        `;
+                        i++;
+                    }
 
                     cartPedidos.appendChild(itemElement);
                     valorTotal += (item.preco * item.quantidade);
@@ -129,9 +156,9 @@ function atualizarCarrinho() {
                         const preco = document.createElement('span');
 
                         if(item.tipo == 'combo'){
-                            sabor.innerHTML = item.sabor;
+                            sabor.innerHTML = item.descricao;
                         }else {
-                            sabor.innerHTML = 'Cupcake ' + item.sabor;
+                            sabor.innerHTML = 'Cupcake ' + item.descricao;
                         }
                         preco.innerHTML = 'R$ ' + formatNumber(item.preco);
 
@@ -151,12 +178,6 @@ function atualizarCarrinho() {
                                 <div onclick=\"adicionarAoCarrinho('${item.tipo}', ${item.id}, 'adicionar')\">+</div>
                             `;
                         }
-
-                        // if($item['quantidade'] == 1){
-                        //     echo "<div onclick=\"adicionarAoCarrinhoVerificacao('$item[tipo]', $item[id], 'diminuir')\">-</div>";
-                        // }else {
-                        //     echo "<div onclick=\"adicionarAoCarrinho('$item[tipo]', $item[id], 'diminuir')\">-</div>";
-                        // }
                         
                         resumoItens.appendChild(sabor);
                         resumoItens.appendChild(preco);
@@ -168,7 +189,7 @@ function atualizarCarrinho() {
                         const v = document.querySelector('.resumo-pedido-footer span');
                         v.innerHTML = `Valor total: R$ ${formatNumber(valorTotal)}`;
 
-                        //Carrinho itens
+
                         const carrinhoItens = document.querySelectorAll('.carrinho-itens-qtd-valor');
                         carrinhoItens[carrinhoItensIterator].innerHTML = '';
 
@@ -195,7 +216,7 @@ function atualizarCarrinho() {
             }
         })
         .catch(error => {
-            console.log('Erro ao atualizar carrinho: ', error);
+            console.error('Erro ao atualizar carrinho: ', error);
         });
 }
 
@@ -227,7 +248,7 @@ function adicionarPersonalizado(){
             if(data.message = "Cupcake já existe no banco de dados."){                
                 adicionarAoCarrinho('cupcake', data.idCupcake);
             }else {
-                alert(data.message);
+                // alert(data.message);
             }
         }
     })
@@ -268,16 +289,13 @@ function exibirNotificacao(tipo){
             break;
     }
 
-    // Mostra a notificação
     notification.classList.add('show');
     
-    // Oculta a notificação após 3 segundos
     setTimeout(() => {
         notification.classList.remove('show');
     }, 3000);
 }
 
-// Mostra o mini carrinho
 function toggleCart() {
     const cartSidebar = document.getElementById('cart-sidebar');
     cartSidebar.classList.toggle('show');
@@ -290,7 +308,6 @@ function diminuir(elemento){
     elemento.parentNode.querySelector('.center').innerHTML--;
 }
 
-// Seleciona sabor no criar cupcake
 function selecionarSabor(element, tipo) {
     const saboresMassa = document.querySelectorAll('.sabor.massa');
     const saboresRecheio = document.querySelectorAll('.sabor.recheio');
@@ -313,7 +330,6 @@ function selecionarSabor(element, tipo) {
     element.classList.add('selected');
 }
 
-// Selecionar método de pagamento -------------------------------------------------------------------------------
 function selecionarMetodoPagamento(element, tipo) {
     const metodoPagamento = document.querySelectorAll('div.opcao');
     metodoPagamento.forEach(opcao => opcao.classList.remove('selected'));
@@ -336,7 +352,6 @@ function selecionarMetodoPagamento(element, tipo) {
     }
 }
 
-// Realizar pagamento
 function realizarPagamento(){
 
     const cep = document.getElementById("cepCarrinho").value;
@@ -360,7 +375,6 @@ function realizarPagamento(){
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data);
             
             if (data.success) {
                 location.href = "pedidos.php?acao=novo_pedido";
@@ -377,14 +391,13 @@ function realizarPagamento(){
     }
 }
 
-// Função para obter os parâmetros da URL
 function getQueryParam(param) {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(param);
 }
 
-// Verifica se a ação está presente na URL
 const acao = getQueryParam('acao');
+
 if (acao === 'novo_pedido') {
     toggleSecao('acompanhar-pedido');
     limparUrl();
@@ -393,12 +406,33 @@ if (acao === 'novo_pedido') {
 
     setTimeout(() => {
         document.querySelector('.barra-progresso-center').classList.add('fill-from-left');
-    }, 5000);
+    }, 2000);
 
     setTimeout(() => {
         toggleMapa();
-    }, 10000);
+    }, 4000);
+    
+    pedidoEntregue();
 }
+
+if (acao === 'email_nao_registrado'){
+    alert("O email não está registrado");
+    limparUrl();
+}else if(acao === 'login_incorreto'){
+    alert("O email e/ou senha estão incorreto(s)");
+    limparUrl();
+}
+
+if(acao === 'registro_feito'){
+    alert("O registro foi feito com sucesso! Faça login!");
+    limparUrl();
+}
+
+if(acao === 'pedido_avaliado'){
+    exibirNotificacao('avaliacao');
+    limparUrl();
+}
+
 
 function toggleMapa(){
     document.querySelector('.barra-progresso-right').classList.add('fill-from-left');
@@ -408,9 +442,10 @@ function toggleMapa(){
 
     const confirmarEntrega = document.querySelector('.confirmar-entrega');
     confirmarEntrega.style.display = 'flex';
+}
 
-    //mudar status do pedido
-    pedidoEntregue();
+function enviarAvaliacao(){
+    location.href = "pedidos.php?acao=pedido_avaliado";
 }
 
 function limparUrl() {
@@ -442,7 +477,7 @@ function pedidoEntregue(){
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            document.querySelector('.highlight-item h2').innerHTML = 'Pedido entregue';
+            document.querySelector('.highlight-item h2').innerHTML = 'Pedido chegou';
             
             const pedidoFooter = document.querySelector('.acompanhar-pedido-footer');
             pedidoFooter.innerHTML = '';
@@ -450,7 +485,7 @@ function pedidoEntregue(){
             const temp = document.createElement('a');
 
             temp.innerHTML = `
-                <a href="#" onclick="repetirPedido(${data.idPedido})"><img src="./assets/plus.png" width="50px"></a>
+                <button class='acompanhar-pedido-footer-button' onclick=\"toggleSecao('confirmar-entrega-temp')\">Confirmar entrega</button>
             `;
 
             pedidoFooter.appendChild(temp);
@@ -477,7 +512,10 @@ function toggleSecao(secao) {
             document.getElementById('AcompanharPedido').classList.toggle("show");
             esconderMain(temp);
             break;
-            
+        case 'confirmar-entrega-temp':
+            temp = document.getElementById('AvaliarPedido');
+            esconderMain(temp);
+            break;
         case 'fechar-avaliacao':
             temp = document.getElementById('AvaliarPedido');
             esconderMain(temp);
@@ -485,10 +523,10 @@ function toggleSecao(secao) {
             
         case 'enviar-avaliacao':
             temp = document.getElementById('AvaliarPedido');
-            // enviarAvaliacao();
-            exibirNotificacao('avaliacao');
             esconderMain(temp);
+            enviarAvaliacao();
             break;
+
         case 'fechar-pedido':
             temp = document.getElementById("FecharPedido");
             enderecoPrincipal();
@@ -499,7 +537,6 @@ function toggleSecao(secao) {
 }
 
 function esconderMain(show) {
-    
     const main = document.querySelector('.main')
     
     if(!show.classList.contains('show')){
@@ -529,7 +566,7 @@ function enderecoPrincipal(){
             numero.value = partes[1].trim();
 
         } else {
-            alert('Erro ao recuperar o endereço. ' + data.message);
+            // alert('Erro ao recuperar o endereço. ' + data.message);
         }
     })
     .catch(error => {
@@ -542,15 +579,12 @@ function selecionarQualidade(element) {
     element.classList.toggle('selected')
 }
 
-// Preencher as estrelas na avaliação
 function fillStar(starValue) {
     
     const stars = document.querySelectorAll('.star');
     
-    // Remover a classe 'filled' de todas as estrelas
     stars.forEach(star => star.classList.remove('filled'));
     
-    // Adicionar a classe 'filled' até a estrela clicada
     stars.forEach((star, index) => {
         if (index < starValue) {
             star.classList.add('filled');
@@ -563,41 +597,41 @@ function toggleMenu() {
     menu.classList.toggle('active');
 }
 
-// Scroll horizontal 
-const carrinhoContainer = document.querySelector('.carrinho-itens');
-let scrollAmount = 0; // Armazena o valor da rolagem a ser aplicado
-let isScrolling = false; // Verifica se já está rolando
-
-carrinhoContainer.addEventListener('wheel', (event) => {
-    event.preventDefault();
-    scrollAmount += event.deltaY * 0.1; // Ajuste a multiplicação para alterar a velocidade (0.3 é o fator de suavização)
-
-    if (!isScrolling) {
-        smoothScroll();
-    }
-});
-
-function smoothScroll() {
-    isScrolling = true;
-    // Reduz gradualmente o valor de scrollAmount para um efeito de suavização
-    scrollAmount *= 0.8;
-    carrinhoContainer.scrollLeft += scrollAmount;
-
-    // Continua rolando enquanto o valor absoluto de scrollAmount for significativo
-    if (Math.abs(scrollAmount) > 0.5) {
-        requestAnimationFrame(smoothScroll);
-    } else {
-        isScrolling = false; // Para a animação quando quase não houver movimento
-    }
-}
-
-function scrollar(lado) {
-    const deslocamento = lado == 'left' ? -240 : 240;
-    carrinhoContainer.scrollBy({
-        left: deslocamento,
-        behavior: 'smooth'
+if(document.getElementById('Carrinho')){
+    const carrinhoContainer = document.querySelector('.carrinho-itens');
+    let scrollAmount = 0;
+    let isScrolling = false;
+    
+    carrinhoContainer.addEventListener('wheel', (event) => {
+        event.preventDefault();
+        scrollAmount += event.deltaY * 0.1;
+    
+        if (!isScrolling) {
+            smoothScroll();
+        }
     });
+
+    function smoothScroll() {
+        isScrolling = true;
+        scrollAmount *= 0.8;
+        carrinhoContainer.scrollLeft += scrollAmount;
+    
+        if (Math.abs(scrollAmount) > 0.5) {
+            requestAnimationFrame(smoothScroll);
+        } else {
+            isScrolling = false;
+        }
+    }
+    
+    function scrollar(lado) {
+        const deslocamento = lado == 'left' ? -240 : 240;
+        carrinhoContainer.scrollBy({
+            left: deslocamento,
+            behavior: 'smooth'
+        });
+    }
 }
+
 
 function formatNumber(value) {
     return new Intl.NumberFormat('pt-BR', {

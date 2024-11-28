@@ -3,9 +3,14 @@
 
     class ClienteController {
 
+        private $cliente;
+
+        public function __construct() {
+            $this->cliente = new Cliente();
+        }
+
         public function getEndereco($usuario){
-            $cliente = new Cliente();
-            return $cliente->getEndereco($usuario);
+            return $this->cliente->getEndereco($usuario);
         }
 
     }

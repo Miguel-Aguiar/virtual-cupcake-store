@@ -10,6 +10,10 @@
             $this->conn = $this->db->connect();
         }
 
+        public function __destruct() {
+            $this->db->close();
+        }
+
         function getEndereco($idCliente) {
             $sql = "SELECT endereco FROM cliente WHERE idCliente = ?;";
             $stmt = $this->conn->prepare($sql);
@@ -18,7 +22,7 @@
             $result = $stmt->get_result();
             
             if ($row = $result->fetch_assoc()) {
-                // return $row['endereco'];
+                
                 echo json_encode([
                     'success' => true,
                     'message' => 'Endereço recuperado com sucesso.',
@@ -34,7 +38,4 @@
         }
 
     }
-
-    $cliente = new Cliente();
-    $cliente->closeConnection();
 ?>

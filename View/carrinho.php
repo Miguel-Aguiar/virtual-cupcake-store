@@ -9,8 +9,6 @@
     
     <link rel="shortcut icon" href="./assets/favicon.png" type="image/x-icon">
 
-    <!-- <script src="script.js"></script> -->
-
 </head>
 <body id="Carrinho">
 
@@ -40,9 +38,8 @@
                         $userRestricoes = $_SESSION['usuario_restricoes'];
                     }
 
-                    // Verifica se o usuário está logado
                     if (isset($_SESSION['usuario_id'])) {
-                        // Recupera as variáveis de sessão
+                        
                         $usuario_nome = $_SESSION['usuario_nome'];
                         echo "<a href='../Controller/logout.php' class='login-link'>Logout</a>";
                     } else {
@@ -58,6 +55,7 @@
         <img class="close" onclick="toggleCart()" src="./assets/fechar.png" width="42px">
         <?php
         include_once '../Controller/CarrinhoController.php';
+        include_once '../Controller/ComboController.php';
 
         echo "<div class='cart-pedidos'>";
         if (isset($_SESSION['usuario_id'])) {
@@ -65,6 +63,8 @@
 
             $carrinhoController = new CarrinhoController();
             $carrinho = $carrinhoController->exibirCarrinho($userId);
+
+            $comboController = new Combo();
 
             $valorTotal = 0;
             if ($carrinho) {
@@ -75,13 +75,13 @@
                     $quantidade = $item['quantidade'];
 
                     if($tipo == 'cupcake'){
-                        $sabor = htmlspecialchars($item['sabor'], ENT_QUOTES, 'UTF-8'); // Para prevenir XSS
+                        $sabor = htmlspecialchars($item['sabor'], ENT_QUOTES, 'UTF-8');
                     }else if($tipo == 'combo'){
                         $tamanho = $item['tamanho'];
                     }
 
-                    $imagem = $tipo === 'cupcake' ? "./assets/cupcake$sabor.png" : "./assets/combo.png";
-
+                    $imagem = $tipo === 'cupcake' ? "./assets/cupcake$sabor.png" : "./assets/cupcake";
+                    
                     if($tipo == 'cupcake'){
 
                         echo "<div class='cart-pedido'>
@@ -94,8 +94,15 @@
                             </div>
                         </div>";
                     }else if ($tipo == 'combo'){
+                        $combo = $comboController->readCombo($item['id']);
+                        $sabores = explode(', ', $combo['sabores']);
+                        
                         echo "<div class='cart-pedido'>
-                            <img src='$imagem'>
+                            <div class='cart-pedido-combo'>
+                                <img src='$imagem$sabores[0].png' width='24px'>
+                                <img src='$imagem$sabores[1].png' width='24px'>
+                                <img src='$imagem$sabores[2].png' width='24px'>
+                            </div>
                             <span>R$ $preco <br> Combo $tamanho</span>
                             <div class='qtd'>
                                 <div onclick=\"adicionarAoCarrinho('$tipo', $id, 'diminuir')\">-</div>
@@ -108,7 +115,7 @@
 
                     $valorTotal += $item['preco'] * $item['quantidade'];
                 }
-                echo "</div>"; // Fecha cart-pedidos
+                echo "</div>";
 
                 echo "
                 <p class='cart-total'>Valor total: R$ " . number_format($valorTotal, 2, ',', '.') . "</p>
@@ -134,13 +141,13 @@
                 <span class="pag">Carrinho</span>
                 <?php
 
-include_once "../Controller/CupcakeController.php";
-include_once "../Controller/ComboController.php";
+                    include_once "../Controller/CupcakeController.php";
+                    include_once "../Controller/ComboController.php";
 
-if(!isset($_SESSION['usuario_id'])){
-    echo "<h2 class='nao_logado'>O usuário deve estar logado para ter acesso ao carrinho!</h2>";
-    
-}else if($carrinho == null){
+                    if(!isset($_SESSION['usuario_id'])){
+                        echo "<h2 class='nao_logado'>O usuário deve estar logado para ter acesso ao carrinho!</h2>";
+                        
+                    }else if($carrinho == null){
                         echo "<h2 class='nao_logado'>O carrinho está vazio!</h2>";
                         
                     }else {
@@ -160,7 +167,6 @@ if(!isset($_SESSION['usuario_id'])){
                         foreach ($carrinho as $item) {
 
                             if($item['tipo'] == 'cupcake'){
-
                                 $restricao = $cupcakeController->verificarRestricoes($item['restricoes'], $userRestricoes);
                                 if($restricao) $restricaoComum = "<small style='color:red;'>Contém: $restricao</small>";
                                 else $restricaoComum = '';
@@ -168,7 +174,7 @@ if(!isset($_SESSION['usuario_id'])){
                                 $descricao = $cupcakeController->getDescricao($item['id']);
                                 echo "<div class='highlight-item'>";
                                 echo "<div class='sabores'>
-                                            <img src='./assets/cupcake1m.png'>
+                                            <img src='./assets/cupcake$item[sabor].png'>
                                         </div>
                                         <div>
                                             <span>R$ ". number_format($item['preco'], 2, ',', '.') . "</span>
@@ -191,13 +197,16 @@ if(!isset($_SESSION['usuario_id'])){
                                 if($restricao) $restricaoComum = "<small style='color:red;'>Contém: $restricao</small>";
                                 else $restricaoComum = '';
 
+                                $precos = explode(',', $combo['precosCupcakes']);
+                                $sabores = explode(', ', $combo['sabores']);
+
                                 $tamanho = strtolower(trim($combo['tamanho']));
                                 echo "
                                     <div class='highlight-item highlight-item-combo'>
                                         <div class='sabores'>
-                                            <img src='./assets/cupcake1m.png'>
-                                            <img src='./assets/cupcake1m.png'>
-                                            <img src='./assets/cupcake1m.png'>
+                                            <img src='./assets/cupcake$sabores[0].png'>
+                                            <img src='./assets/cupcake$sabores[1].png'>
+                                            <img src='./assets/cupcake$sabores[2].png'>
                                         </div>
                                         <div class='combos-desc'>
                                             <span>Combo $combo[tamanho]</span>
@@ -205,9 +214,6 @@ if(!isset($_SESSION['usuario_id'])){
                                         </div>";
 
                                     echo "<div class='combos-sabores'>";
-                            
-                                    $precos = explode(',', $combo['precosCupcakes']);
-                                    $sabores = explode(',', $combo['sabores']);
                                     
                                     $valorTotal = 0;
                                     for ($i=0; $i < 3; $i++) { 
@@ -252,7 +258,6 @@ if(!isset($_SESSION['usuario_id'])){
 
                             $titulo = $item['tipo'] == 'cupcake' ? 'Cupcake ' . $item['sabor'] : 'Combo ' . $item['tamanho'];
 
-                            
                             echo "
                                 <div class='resumo-itens'>
                                     <span>" . $titulo . "</span>
@@ -318,19 +323,19 @@ if(!isset($_SESSION['usuario_id'])){
                             <span>Cartão de crédito</span>
                             <div id="credito">
                                 <form action="#">
-                                    <!-- Nome do Titular -->
+                                    
                                     <input type="text" name="nome" placeholder="Nome do Titular" disabled>
 
-                                    <!-- Número do Cartão -->
+                                    
                                     <input type="text" name="numero-cartao" placeholder="Número do Cartão" disabled>
 
-                                    <!-- Data de Validade -->
+                                    
                                     <input type="text" name="validade" placeholder="Validade (MM/AA)" disabled>
 
-                                    <!-- Código de Segurança -->
+                                    
                                     <input type="text" name="codigo" placeholder="Código de Segurança" disabled>
 
-                                    <!-- CPF do Titular -->
+                                    
                                     <input type="text" name="cpf" placeholder="CPF do Titular" disabled>
                                 </form>
                             </div>

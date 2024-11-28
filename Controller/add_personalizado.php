@@ -4,7 +4,6 @@
 
     session_start();
 
-    // Verifica se o usuário está logado
     if (!isset($_SESSION['usuario_id'])) {
         echo json_encode(['success' => false, 'message' => 'Você precisa estar logado.']);
         exit;

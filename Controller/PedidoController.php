@@ -3,29 +3,23 @@
 
     class PedidoController {
 
+        private $pedido;
+        
+        public function __construct() {
+            $this->pedido = new Pedido();    
+        } 
+
         public function readAll($idCliente){
-            $pedido = new Pedido();
-            return $pedido->readAll($idCliente);
+            return $this->pedido->readAll($idCliente);
         }
 
         public function adicionarPedido($usuario){
-            $pedido = new Pedido();
-            return $pedido->adicionarPedido($usuario);
+            return $this->pedido->adicionarPedido($usuario);
         }
 
         public function pedidoEntregue($usuario) {
-            $pedido = new Pedido();
-            return $pedido->pedidoEntregue($usuario);
+            return $this->pedido->pedidoEntregue($usuario);
         }
-
+        
     }
-
-    // $controller = new CupcakeController();
-    // $cupcake = $controller->readAll();
-    // foreach ($cupcake as $r) {
-    //     echo "Id: " . $r['idCupcake'] . '<br>';
-    //     echo "Sabor: " . $r['sabor'] . '<br>';
-    //     echo "Descricao: " . $r['descricao'] . '<br>';
-    //     echo "Preco: " . $r['preco'] . '<br>';
-    // }
 ?>

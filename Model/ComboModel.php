@@ -4,11 +4,14 @@
     class Combo {
         private $db;
         private $conn;
-        private $table = 'combo';
 
         public function __construct() {
             $this->db = new Database();
             $this->conn = $this->db->connect();
+        }
+
+        public function __destruct() {
+            $this->db->close();
         }
 
         public function readAll() {
@@ -33,19 +36,17 @@
             ";
             $result = $this->conn->query($sql);
     
-            // Verifica se a consulta foi bem-sucedida
             if ($result && $result->num_rows > 0) {
-                // Cria um array para armazenar os resultados
+                
                 $cupcakes = [];
     
-                // Usa fetch_assoc para obter cada linha como um array associativo
                 while ($row = $result->fetch_assoc()) {
                     $cupcakes[] = $row;
                 }
     
                 return $cupcakes;
             } else {
-                return []; // Retorna um array vazio se não houver resultados
+                return [];
             }
         }
 
@@ -82,19 +83,4 @@
         }
 
     }
-
-    $combos = new Combo();
-    $resultado = $combos->readAll();
-
-    // foreach ($resultado as $r) {
-        // echo '<pre>';
-        // print_r($r);
-        // echo '</pre>';
-    //     echo "Id: " . $r['idCupcake'] . '<br>';
-    //     echo "Sabor: " . $r['sabor'] . '<br>';
-    //     echo "Descricao: " . $r['descricao'] . '<br>';
-    //     echo "Preco: " . $r['preco'] . '<br>';
-    // }
-
-    $combos->closeConnection();
 ?>

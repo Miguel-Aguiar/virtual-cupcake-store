@@ -3,24 +3,20 @@
 
     class ComboController {
 
+        private $combo;
+
+        public function __construct() {
+            $this->combo = new Combo();
+        }
+
         public function readAll(){
-            $combo = new Combo();
-            return $combo->readAll();
+            return $this->combo->readAll();
         }
 
         public function readCombo($idCombo){
-            $combo = new Combo();
-            return $combo->readCombo($idCombo);
+            return $this->combo->readCombo($idCombo);
         }
 
     }
-
-    // $controller = new CupcakeController();
-    // $cupcake = $controller->readAll();
-    // foreach ($cupcake as $r) {
-    //     echo "Id: " . $r['idCupcake'] . '<br>';
-    //     echo "Sabor: " . $r['sabor'] . '<br>';
-    //     echo "Descricao: " . $r['descricao'] . '<br>';
-    //     echo "Preco: " . $r['preco'] . '<br>';
-    // }
+    
 ?>
