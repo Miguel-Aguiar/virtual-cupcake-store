@@ -570,7 +570,7 @@ span.previsao {
 
 .mapa iframe {
     width: 100%;
-    height: 260px;
+    height: 235px;
     border-radius: 20px;
 }
 
@@ -700,7 +700,6 @@ span.previsao {
     position: absolute;
     top: -10px;
     opacity: 0;
-    width: 100%;
     height: 0;
     z-index: -99;
     background-color: white;
@@ -1007,7 +1006,7 @@ span.previsao {
 
 .fechar-pedido {
     position: absolute;
-    top: -800px;
+    top: -1000px;
     left: 0;
     width: 0;
     height: 0;
@@ -1146,7 +1145,7 @@ h2.nao_logado {
     right: 0px;
     background-color: white;
     padding: 20px;
-    border-radius: 20px;
+    border-radius: 25px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 300px;
     text-align: center;
@@ -1324,6 +1323,7 @@ h2.nao_logado {
 
     .fechar-pedido-passos .opcao #credito.show {
         top: 480px;
+        width: 70%;
     }
 
 }
@@ -1434,7 +1434,7 @@ h2.nao_logado {
     }
 
     #Pedidos main {
-        min-width: 375px;
+        min-width: 350px;
     }
 
     #Pedidos div.info span {
@@ -1443,6 +1443,10 @@ h2.nao_logado {
 
     #Pedidos span.previsao {
         font-size: 0.9em;
+    }
+
+    #Pedidos .confirmar-entrega {
+        padding: 10px;
     }
 
     #Pedidos .confirmar-entrega h2 {

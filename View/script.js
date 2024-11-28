@@ -341,11 +341,11 @@ function selecionarMetodoPagamento(element, tipo) {
     if(tipo == 'credito'){
         pix.classList.remove('show');
 
-        credito.classList.add('show');
+        credito.classList.toggle('show');
     } else if(tipo == 'pix'){
         credito.classList.remove('show');
 
-        pix.classList.add('show');
+        pix.classList.toggle('show');
     } else {
         pix.classList.remove('show');
         credito.classList.remove('show');
@@ -356,9 +356,8 @@ function realizarPagamento(){
 
     const cep = document.getElementById("cepCarrinho").value;
     const endereco = document.getElementById("enderecoCarrinho").value;
-    const numero = document.getElementById("numeroCarrinho").value;
 
-    if(!(cep && endereco && numero)){
+    if(!(cep && endereco)){
         exibirNotificacao('endereco-incompleto');
         return;   
     }
@@ -548,7 +547,6 @@ function esconderMain(show) {
 
 function enderecoPrincipal(){
     const endereco = document.getElementById('enderecoCarrinho');
-    const numero = document.getElementById('numeroCarrinho');
     
     fetch('../Controller/get_endereco.php', {
         method: 'POST',
@@ -559,12 +557,8 @@ function enderecoPrincipal(){
     .then(response => response.json())
     .then(data => {
         
-        if (data.success) {
-            const partes = data.endereco.split(',');
-            
-            endereco.value = partes[0];
-            numero.value = partes[1].trim();
-
+        if (data.success) {            
+            endereco.value = data.endereco;
         } else {
             // alert('Erro ao recuperar o endereço. ' + data.message);
         }

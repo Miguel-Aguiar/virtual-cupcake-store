@@ -306,10 +306,8 @@
                             <input type="text" id="cepCarrinho" name="cep" placeholder="00000-000" maxlength="9" pattern="\d{5}-?\d{3}" required>
                     
                             <label for="endereco">Endereço*:</label>
-                            <input type="text" id="enderecoCarrinho" name="endereco" placeholder="Rua Exemplo, Av. Exemplo" required>
+                            <input type="text" id="enderecoCarrinho" name="endereco" placeholder="Rua Exemplo 146" required>
                     
-                            <label for="numero">Número*:</label>
-                            <input type="number" id="numeroCarrinho" name="numero" placeholder="555" required>
                             
                             <label for="complemento">Complemento:</label>
                             <input type="text" id="complemento" name="complemento" placeholder="Apto, bloco, etc.">

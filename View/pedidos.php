@@ -247,11 +247,11 @@
                             <small>Escolha de 1 a 5 estrelas para avaliar!</small>
                         </div>
                         <div class="estrelas">
-                            <span onclick="fillStar(1)" class="star" data-value="1">&#9733;</span>
-                            <span onclick="fillStar(2)" class="star" data-value="2">&#9733;</span>
-                            <span onclick="fillStar(3)" class="star" data-value="3">&#9733;</span>
-                            <span onclick="fillStar(4)" class="star" data-value="4">&#9733;</span>
-                            <span onclick="fillStar(5)" class="star" data-value="5">&#9733;</span>
+                            <span onclick="fillStar(1)" class="star filled" data-value="1">&#9733;</span>
+                            <span onclick="fillStar(2)" class="star filled" data-value="2">&#9733;</span>
+                            <span onclick="fillStar(3)" class="star filled" data-value="3">&#9733;</span>
+                            <span onclick="fillStar(4)" class="star filled" data-value="4">&#9733;</span>
+                            <span onclick="fillStar(5)" class="star filled" data-value="5">&#9733;</span>
                         </div>
                         <p>O que você gostou ?</p>
                         <div class="qualidades">
