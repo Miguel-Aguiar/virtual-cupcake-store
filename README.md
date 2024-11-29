@@ -21,6 +21,6 @@ Obs.: Para o site funcionar tanto o apache quanto o MySQL devem estar iniciados.
 8- Clique no banco de dados cupcakesstore para acessá-lo, abra a aba sql e então copie todo o código que está no arquivo cupcakesstore.sql, cole e execute.
 Obs.: O arquivo cupcakesstore.sql contém todas as tabelas a dados necessários para que a aplicação funcione.
 
-9- Agora abra o site no endereço: 'http://localhost/virtual-cupcake-store-main/virtual-cupcake-store-main/View/home.php' e pronto.
+9- Agora abra o site no endereço: 'http://localhost/virtual-cupcake-store-main/View/home.php' e pronto.
 
 Dessa forma, você já vai ter acesso ao site, basta criar uma conta e testar suas funcionalidades a vontade.
