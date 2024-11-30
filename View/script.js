@@ -301,13 +301,6 @@ function toggleCart() {
     cartSidebar.classList.toggle('show');
 }
 
-function aumentar(elemento){
-    elemento.parentNode.querySelector('.center').innerHTML++;
-}
-function diminuir(elemento){
-    elemento.parentNode.querySelector('.center').innerHTML--;
-}
-
 function selecionarSabor(element, tipo) {
     const saboresMassa = document.querySelectorAll('.sabor.massa');
     const saboresRecheio = document.querySelectorAll('.sabor.recheio');
