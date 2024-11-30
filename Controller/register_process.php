@@ -16,9 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
-        
-        echo "Este e-mail já está registrado. Por favor, use outro.<br>";
-        echo "<a href='../View/login.html'>Voltar</a>";
+        header('Location: ../View/login.html?acao=email_ja_registrado');
         exit;
     }
 
