@@ -110,6 +110,7 @@ header {
     padding: 20px;
     transition: right 0.3s ease;
     z-index: 1000;
+    overflow-x: auto;
 }
 
 .cart-sidebar.show {
