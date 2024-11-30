@@ -86,8 +86,6 @@ function atualizarCarrinho() {
         .then(data => {
 
             const cartPedidos = document.querySelector('.cart-pedidos');
-            const combos = document.querySelectorAll('div.sabores');
-            
             
             cartPedidos.innerHTML = '';
 
@@ -407,22 +405,34 @@ if (acao === 'novo_pedido') {
     pedidoEntregue();
 }
 
-if (acao === 'email_nao_registrado'){
-    alert("O email não está registrado");
-    limparUrl();
-}else if(acao === 'login_incorreto'){
-    alert("O email e/ou senha estão incorreto(s)");
-    limparUrl();
-}
+switch (acao) {
+    case 'registro_feito':
+        alert("O registro foi feito com sucesso! Faça login!");
+        limparUrl();
+        break;
 
-if(acao === 'registro_feito'){
-    alert("O registro foi feito com sucesso! Faça login!");
-    limparUrl();
-}
+    case 'email_ja_registrado':
+        alert("O email já está registrado!");
+        limparUrl();
+        break;
 
-if(acao === 'pedido_avaliado'){
-    exibirNotificacao('avaliacao');
-    limparUrl();
+    case 'email_nao_registrado':
+        alert("O email não está registrado");
+        limparUrl();
+        break;
+
+    case 'login_incorreto':
+        alert("O email e/ou senha estão incorreto(s)");
+        limparUrl();
+        break;
+
+    case 'pedido_avaliado':
+        exibirNotificacao('avaliacao');
+        limparUrl();
+        break;
+    
+    default:
+        break;
 }
 
 
