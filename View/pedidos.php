@@ -202,7 +202,7 @@
                                     echo "<div class='estrelas'>";
 
                                     for ($i=0; $i < $pedido['nota']; $i++) { 
-                                        echo "<span class='star filled' style='cursor: auto'>&#9733;</span>";
+                                        echo "<span class='estrela filled' style='cursor: auto'>&#9733;</span>";
                                     }
 
                                     echo "</div>";
