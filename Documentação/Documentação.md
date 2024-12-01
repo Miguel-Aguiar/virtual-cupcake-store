@@ -637,3 +637,249 @@ Cenário alternativo:
 ## Mapa Navegacional  
  
 ![Mapa Navegacional](./assets/mapa_navegacional.jpg)  
+  
+## Dicionário de Dados  
+
+### Tabela: `carrinho`
+
+| Campo       | Tipo     | Nulo | Default | Descrição                        |
+|-------------|----------|------|---------|----------------------------------|
+| idCarrinho  | INT(11)  | NÃO  | -       | Identificador único do carrinho. |
+| idCliente   | INT(11)  | NÃO  | -       | Identificador do cliente associado. |
+
+---
+
+### Tabela: `carrinho_combo`
+
+| Campo       | Tipo     | Nulo | Default | Descrição                                |
+|-------------|----------|------|---------|------------------------------------------|
+| idCarrinho  | INT(11)  | NÃO  | -       | Identificador do carrinho.               |
+| idCombo     | INT(11)  | NÃO  | -       | Identificador do combo adicionado.       |
+| quantidade  | INT(11)  | NÃO  | -       | Quantidade de combos no carrinho (> 0).  |
+
+---
+
+### Tabela: `carrinho_cupcake`
+
+| Campo       | Tipo     | Nulo | Default | Descrição                                  |
+|-------------|----------|------|---------|--------------------------------------------|
+| idCarrinho  | INT(11)  | NÃO  | -       | Identificador do carrinho.                 |
+| idCupcake   | INT(11)  | NÃO  | -       | Identificador do cupcake adicionado.       |
+| quantidade  | INT(11)  | NÃO  | -       | Quantidade de cupcakes no carrinho.        |
+
+---
+
+### Tabela: `cliente`
+
+| Campo           | Tipo          | Nulo | Default | Descrição                                     |
+|-----------------|---------------|------|---------|-----------------------------------------------|
+| idCliente       | INT(11)       | NÃO  | -       | Identificador único do cliente.               |
+| nome            | VARCHAR(100)  | NÃO  | -       | Nome completo do cliente.                     |
+| email           | VARCHAR(255)  | NÃO  | -       | Endereço de email único.                      |
+| senha           | VARCHAR(255)  | NÃO  | -       | Senha do cliente (criptografada).             |
+| endereco        | VARCHAR(255)  | NÃO  | -       | Endereço do cliente.                          |
+| numeroContato   | VARCHAR(20)   | NÃO  | -       | Número de telefone do cliente.                |
+| restricoes      | VARCHAR(255)  | SIM  | NULL    | Restrições alimentares (opcional).            |
+
+---
+
+### Tabela: `combo`
+
+| Campo       | Tipo          | Nulo | Default | Descrição                       |
+|-------------|---------------|------|---------|---------------------------------|
+| idCombo     | INT(11)       | NÃO  | -       | Identificador único do combo.   |
+| tamanho     | ENUM          | NÃO  | -       | Tamanho do combo.               |
+| preco       | DECIMAL(5,2)  | NÃO  | -       | Preço do combo.                 |
+
+---
+
+### Tabela: `combo_cupcake`
+
+| Campo       | Tipo     | Nulo | Default | Descrição                          |
+|-------------|----------|------|---------|------------------------------------|
+| idCombo     | INT(11)  | NÃO  | -       | Identificador do combo.            |
+| idCupcake   | INT(11)  | NÃO  | -       | Identificador do cupcake no combo. |
+
+---
+
+### Tabela: `cupcake`
+
+| Campo       | Tipo          | Nulo | Default | Descrição                             |
+|-------------|---------------|------|---------|---------------------------------------|
+| idCupcake   | INT(11)       | NÃO  | -       | Identificador único do cupcake.       |
+| sabor       | VARCHAR(100)  | NÃO  | -       | Sabor do cupcake.                     |
+| descricao   | VARCHAR(300)  | NÃO  | -       | Descrição detalhada do cupcake.       |
+| preco       | DECIMAL(7,2)  | NÃO  | -       | Preço unitário do cupcake.            |
+| restricoes  | VARCHAR(100)  | SIM  | NULL    | Restrições alimentares associadas.    |
+
+---
+
+### Tabela: `pedido`
+
+| Campo       | Tipo          | Nulo | Default | Descrição                          |
+|-------------|---------------|------|---------|------------------------------------|
+| idPedido    | INT(11)       | NÃO  | -       | Identificador único do pedido.     |
+| idCliente   | INT(11)       | NÃO  | -       | Identificador do cliente.          |
+| status      | VARCHAR(50)   | NÃO  | pendente | Status do pedido (e.g., pendente). |
+
+---
+
+### Tabela: `pedido_combo`
+
+| Campo       | Tipo     | Nulo | Default | Descrição                          |
+|-------------|----------|------|---------|------------------------------------|
+| idPedido    | INT(11)  | NÃO  | -       | Identificador do pedido.           |
+| idCombo     | INT(11)  | NÃO  | -       | Identificador do combo no pedido.  |
+| quantidade  | INT(11)  | NÃO  | -       | Quantidade do combo no pedido.     |
+
+---
+
+### Tabela: `pedido_cupcake`
+
+| Campo       | Tipo     | Nulo | Default | Descrição                             |
+|-------------|----------|------|---------|---------------------------------------|
+| idPedido    | INT(11)  | NÃO  | -       | Identificador do pedido.              |
+| idCupcake   | INT(11)  | NÃO  | -       | Identificador do cupcake no pedido.   |
+| quantidade  | INT(11)  | NÃO  | -       | Quantidade de cupcakes no pedido.     |  
+
+## Testes:    
+  
+1.   Cadastro de Clientes  
+Funcionalidades testadas:  
+⦁	Cadastro de novos clientes.  
+⦁	Verificação de campos obrigatórios (nome, e-mail, senha, endereço, número de contato).  
+⦁	Restrições armazenadas corretamente.  
+Procedimentos:  
+⦁	Acesse a página de cadastro.  
+⦁	Preencha todos os campos corretamente e envie.  
+⦁	Tente enviar o formulário sem preencher campos obrigatórios.  
+⦁	Insira restrições alimentares específicas (ex.  :   "glúten" e "lactose").  
+Resultados:  
+⦁	✅ O sistema cadastrou o cliente com sucesso ao preencher os campos corretamente.  
+⦁	✅ Os campos obrigatórios não preenchidos impediram o envio do formulário.  
+⦁	✅ As restrições foram armazenadas corretamente na tabela cliente.  
+  
+2.   Sistema de Login  
+Funcionalidades testadas:  
+⦁	Login com credenciais válidas.  
+⦁	Impedimento de login com credenciais inválidas.  
+Procedimentos:  
+⦁	Insira um e-mail e senha corretos cadastrados no sistema.  
+⦁	Tente realizar login com e-mail ou senha inválidos.  
+Resultados:  
+⦁	✅ O sistema permitiu o login com credenciais válidas e redirecionou o usuário para a página inicial.  
+⦁	✅ O sistema exibiu mensagem de erro para e-mail ou senha inválidos.  
+  
+3.   Visualização de Cupcakes na Página Inicial  
+Funcionalidades testadas:  
+⦁	Exibição dos cupcakes cadastrados.  
+⦁	Adição de cupcakes ao carrinho a partir da home.  
+Procedimentos:  
+⦁	Acesse a página inicial com cupcakes cadastrados no banco.  
+⦁	Adicione um cupcake ao carrinho clicando no botão correspondente.  
+⦁	Verifique a persistência das informações no banco de dados.  
+Resultados:  
+⦁	✅ Todos os cupcakes cadastrados foram exibidos corretamente na página inicial.  
+⦁	✅ O botão "Adicionar ao Carrinho" funcionou e o item foi inserido na tabela carrinho_cupcake.  
+⦁	✅ As informações do cupcake adicionado apareceram no modal do carrinho.  
+  
+4.   Gerenciamento de Carrinho (Home)  
+Funcionalidades testadas:  
+⦁	Exclusão de itens do carrinho.  
+⦁	Atualização do valor total do carrinho.  
+⦁	Persistência de alterações no banco de dados.  
+Procedimentos:  
+⦁	Adicione vários cupcakes e combos ao carrinho.  
+⦁	Exclua um item do carrinho.  
+⦁	Verifique a atualização do valor total do carrinho.  
+⦁	Confirme as alterações na tabela carrinho_cupcake e carrinho_combo.  
+Resultados:  
+⦁	✅ Os cupcakes e combos selecionados foram adicionados ao carrinho e exibidos corretamente no resumo.  
+⦁	✅ Ao excluir um item, ele foi removido da interface e da tabela respectiva.  
+⦁	✅ O valor total do carrinho foi recalculado corretamente após exclusões e alterações.  
+⦁	✅ Todas as operações foram refletidas no banco de dados sem erros.  
+  
+5.   Gerenciamento do Mini Carrinho  
+Funcionalidades testadas:  
+⦁	Exibição dinâmica do conteúdo do mini carrinho.  
+⦁	Adição de itens ao mini carrinho.  
+⦁	Remoção de itens do mini carrinho.  
+⦁	Atualização em tempo real do valor total e quantidade de itens.  
+Procedimentos:  
+⦁	Exibição do Mini Carrinho:  
+⦁	Clique no ícone do carrinho na interface para abrir o mini carrinho.  
+⦁	Verifique se o mini carrinho exibe corretamente os cupcakes adicionados.  
+⦁	Adição de Itens ao Mini Carrinho:  
+⦁	Adicione cupcakes pela interface da home.  
+⦁	Verifique se os itens são exibidos imediatamente no mini carrinho sem necessidade de recarregar a página.  
+⦁	Remoção de Itens do Mini Carrinho:  
+⦁	Use o botão "Remover" em um cupcake exibido no mini carrinho.  
+⦁	Verifique se o item é removido em tempo real da interface e do banco de dados.  
+⦁	Atualização do Valor Total e Quantidade:  
+⦁	Observe o valor total e o contador de itens no mini carrinho.  
+⦁	Adicione ou remova itens e confirme se as informações são atualizadas instantaneamente.  
+Resultados:  
+⦁	Exibição do Mini Carrinho:  
+⦁	✅ O mini carrinho abriu corretamente ao clicar no ícone.  
+⦁	✅ Todos os cupcakes previamente adicionados ao carrinho foram exibidos com detalhes como nome, preço e quantidade.  
+⦁	Adição de Itens ao Mini Carrinho:  
+⦁	✅ Os cupcakes adicionados foram exibidos no mini carrinho em tempo real, sem necessidade de recarregar a página.  
+⦁	✅ A tabela carrinho_cupcake foi atualizada no banco de dados, refletindo a operação.  
+⦁	Remoção de Itens do Mini Carrinho:  
+⦁	✅ Os itens foram removidos instantaneamente da interface ao clicar no botão "Remover".  
+⦁	✅ O banco de dados foi atualizado, removendo corretamente o item da tabela carrinho_cupcake.  
+⦁	Atualização do Valor Total e Quantidade:  
+⦁	✅ O valor total foi recalculado imediatamente após cada adição ou remoção de item.  
+⦁	✅ O contador de itens no ícone do carrinho atualizou automaticamente, refletindo as mudanças.  
+  
+6.   Cupcakes Personalizados  
+Funcionalidades testadas:  
+⦁	Adição de cupcakes personalizados.  
+⦁	Visualização de cupcakes no front-end.  
+Procedimentos:  
+⦁	Adicionar cupcakes com diferentes sabores.  
+⦁	Tente adicionar sem selecionar os sabores.  
+⦁	Visualize cupcakes no site após a adição.  
+Resultados:  
+⦁	✅ Cupcakes foram adicionados corretamente e inseridos na tabela cupcake.  
+⦁	✅ O sistema impediu o cadastro sem os sabores.  
+⦁	✅ As informações de cupcakes apareceram corretamente no front-end.  
+  
+7.   Adição de Combos ao carrinho  
+Funcionalidades testadas:  
+⦁	Adição de combos.  
+⦁	Associação de cupcakes aos combos.  
+⦁	Exibição de combos na interface.  
+Procedimentos:  
+⦁	Adicione combos com diferentes tamanhos e preços.  
+⦁	Associe cupcakes aos combos cadastrados.  
+⦁	Visualize os combos no site.  
+Resultados:  
+⦁	✅ Combos foram inseridos corretamente no carrinho.  
+⦁	✅ Associações foram registradas na tabela combo_cupcake.  
+⦁	✅ Combos exibiram os cupcakes associados na interface.  
+  
+8.   Sistema de Pedidos  
+Funcionalidades testadas:  
+⦁	Finalização de pedidos.  
+⦁	Registro de pedidos no banco.  
+⦁	Exibição de histórico de pedidos.  
+Procedimentos:  
+⦁	Adicione itens ao carrinho e finalize a compra.  
+⦁	Verifique o registro na tabela pedido.  
+⦁	Consulte o histórico de pedidos do cliente.  
+Resultados:  
+⦁	✅ Pedidos foram registrados corretamente na tabela pedido.  
+⦁	✅ Os itens do pedido foram registrados nas tabelas pedido_combo e pedido_cupcake.  
+⦁	✅ O histórico exibiu corretamente os pedidos finalizados.  
+  
+9.   Segurança e Integridade dos Dados  
+Funcionalidades testadas:  
+⦁	Restrições de exclusão em cascata (clientes, carrinhos e pedidos).  
+⦁	Validação de e-mails duplicados no cadastro de clientes.  
+Procedimentos:  
+⦁	Exclua um cliente e verifique a exclusão dos dados associados.  
+⦁	Tente cadastrar um cliente com e-mail já registrado.  
+Resultados:  
+⦁	✅ Excluindo um cliente, os dados associados (carrinho, pedidos) foram removidos corretamente.  
+⦁	✅ O sistema impediu o cadastro de clientes com e-mails duplicados.  
