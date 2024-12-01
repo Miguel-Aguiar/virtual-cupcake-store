@@ -353,7 +353,7 @@ Prioridade:
 | 14  | Criar Seu Próprio Cupcake                 | 5                     | C          |
 | 15  | Gerenciamento de Restrições Alimentares   | 5                     | A          |  
   
-![Backlog de produto](./assets/backlog_de_produto.png)  
+![Backlog de produto](./assets/backlog_produto.png)  
   
 ## Mapa de afinidade  
 
