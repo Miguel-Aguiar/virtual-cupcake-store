@@ -1,9 +1,9 @@
 <?php
 class Database {
-    private $host = "mysql.hostinger.com";
-    private $usuario = "u927873411_miguelaguiar";
-    private $senha = ">8SryDXWD";
-    private $banco = "u927873411_cupcakesstore";
+    private $host = "localhost";
+    private $usuario = "root";
+    private $senha = "";
+    private $banco = "cupcakesstore";
     private $conn;
 
     public function connect() {
