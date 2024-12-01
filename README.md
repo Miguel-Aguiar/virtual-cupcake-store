@@ -1,4 +1,4 @@
-# virtual-cupcake-store
+# Loja de Cupcakes Virtual
 
 Acesse o site pelo link: https://virtual-cupcake-store.site/View/home.
 
