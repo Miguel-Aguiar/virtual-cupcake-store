@@ -209,104 +209,6 @@ span[data-fulltext]:hover::after{
     background-color: #f4f4f4;
 }
 
-/* Vitrine --------------------------------------------------------------------------------------*/
-
-main {
-    max-width: 75%;
-    min-width: 920px;
-    margin: 50px auto;
-}
-
-.highlight {
-    position: relative;
-}
-
-.highlight-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    background-color: #e0e0e0;
-    padding: 40px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 40px;
-    justify-content: space-around;
-    border-radius: 15px;
-}
-
-.highlight-item {
-    background-color: #ffffff;
-    width: 100%;
-    min-width: 180px;
-    height: 230px;
-    flex: 1;
-    text-align: center;
-    border-radius: 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    font-weight: bold;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-}
-
-.highlight-item a img:hover {
-    scale: 1.1;
-}
-
-.border {
-    display: block;
-    width: 100%;
-    border-bottom: 2px solid black;
-}
-
-span.pag {
-    position: absolute;
-    top: -10px;
-    font-size: 1.3em;
-    font-weight: bold;
-}
-
-#Pedidos span.pag,
-#Combos span.pag,
-#Carrinho span.pag {
-    left: 40px;
-}
-
-.notification {
-    position: absolute;
-    top: -20px;
-    right: 50%;
-    transform: translate(50%);
-    background-color: #4CAF50;
-    color: white;
-    text-align: center;
-    padding: 10px 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.5s, visibility 0.5s;
-}
-
-.notification.show {
-    opacity: 1;
-    visibility: visible;
-    z-index: 99;
-}
-
-footer {
-    margin-top: auto;
-    width: 100%;
-    height: 80px;
-    padding: 30px;
-    background-color: #333;
-    color: #fff;
-    border-top: 4px solid #252525;
-    text-align: center;
-    font-size: 1em;
-}
-
 /* Login ----------------------------------------------------------------------------------------*/
 
 .auth-container {
@@ -415,6 +317,112 @@ input[type="checkbox"]{
 
 .register-btn:hover {
     background-color: #0056b3;
+}
+
+#RedefinirSenha .auth-container {
+    max-width: 50%;
+}
+
+#RedefinirSenha .login-block {
+    width: 100%;
+}
+
+/* Vitrine --------------------------------------------------------------------------------------*/
+
+main {
+    max-width: 75%;
+    min-width: 920px;
+    margin: 50px auto;
+}
+
+.highlight {
+    position: relative;
+}
+
+.highlight-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    background-color: #e0e0e0;
+    padding: 40px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    justify-content: space-around;
+    border-radius: 15px;
+}
+
+.highlight-item {
+    background-color: #ffffff;
+    width: 100%;
+    min-width: 180px;
+    height: 230px;
+    flex: 1;
+    text-align: center;
+    border-radius: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.highlight-item a img:hover {
+    scale: 1.1;
+}
+
+.border {
+    display: block;
+    width: 100%;
+    border-bottom: 2px solid black;
+}
+
+span.pag {
+    position: absolute;
+    top: -10px;
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+#Pedidos span.pag,
+#Combos span.pag,
+#Carrinho span.pag {
+    left: 40px;
+}
+
+.notification {
+    position: absolute;
+    top: -20px;
+    right: 50%;
+    transform: translate(50%);
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s, visibility 0.5s;
+}
+
+.notification.show {
+    opacity: 1;
+    visibility: visible;
+    z-index: 99;
+}
+
+footer {
+    margin-top: auto;
+    width: 100%;
+    height: 80px;
+    padding: 30px;
+    background-color: #333;
+    color: #fff;
+    border-top: 4px solid #252525;
+    text-align: center;
+    font-size: 1em;
 }
 
 /* Pedidos ------------------------------------------------------------------------------------- */

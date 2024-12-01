@@ -20,6 +20,10 @@
         public function pedidoEntregue($usuario) {
             return $this->pedido->pedidoEntregue($usuario);
         }
+
+        public function adicionarNota($idPedido, $nota){
+            return $this->pedido->adicionarNota($idPedido, $nota);
+        }
         
     }
 ?>

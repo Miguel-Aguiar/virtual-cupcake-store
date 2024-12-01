@@ -33,6 +33,28 @@
             }
         }
 
+        public function redefinirSenha($email, $telefone) {
+            $sql = "SELECT idCliente FROM cliente WHERE email = ? AND numeroContato = ?";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("si", $email, $telefone);
+            $stmt->execute();
+            $result = $stmt->get_result();
+        
+            if ($row = $result->fetch_assoc()) {
+                return $row['idCliente'];
+            } else {
+                header('Location: ../View/redefinirSenha.html?acao=redefinir_erro');  
+            }
+        }
+
+        public function atualizarSenha($nova_senha, $user_id){
+            $query = $this->conn->prepare("UPDATE cliente SET senha = ? WHERE idCliente = ?");
+            $query->execute([$nova_senha, $user_id]);
+
+            header('Location: ../View/login.html?acao=senha_alterada');
+        }
+        
+
         public function closeConnection() {
             $this->db->close();
         }

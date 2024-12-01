@@ -7,9 +7,6 @@
 
     try {
 
-        $db = new Database();
-        $conn = $db->connect();
-
         $pedidoController = new PedidoController();
         $pedidoController->pedidoEntregue($usuario);
 

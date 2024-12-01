@@ -22,6 +22,8 @@
                     p.idPedido,
                     p.idCliente,
                     p.status,
+                    p.dataPedido,
+                    p.nota,
                     
                     GROUP_CONCAT(DISTINCT CONCAT(c.sabor, ' ', pc.quantidade, ' ', c.preco) SEPARATOR '|') AS cupcakes,
                     
@@ -45,7 +47,7 @@
                 ORDER BY 
     				p.idPedido DESC
                 
-                LIMIT 5;
+                LIMIT 7;
             ";
 
             $stmt = $this->conn->prepare($sql);
@@ -157,6 +159,30 @@
                 $this->conn->rollback();
                 
                 echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+            }
+        }
+
+        public function adicionarNota($idPedido, $nota){
+            $sql = "UPDATE pedido
+                SET nota = ?
+                WHERE idPedido = ?;
+            ";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("ii", $nota, $idPedido);
+            // $stmt->execute();
+
+            
+
+            if ($stmt->execute()) {
+                echo json_encode([
+                    'success' => true, 
+                    'message' => 'Nota adicionada com sucesso'
+                ]);
+            } else {
+                echo json_encode([
+                    'success' => false, 
+                    'message' => 'Erro na adição da nota'
+                ]);
             }
         }
         

@@ -156,13 +156,16 @@
     
                             foreach ($pedidos as $pedido) {
                                 $valorPedido = 0;
-    
+                                $dataPedido = DateTime::createFromFormat("Y-m-d H:i:s", $pedido['dataPedido'])->format("d/m H:i");
+
                                 echo "<div class='highlight-item'>";
                                 echo "<h2>";
                                 echo $pedido['status'] == 'pendente' ? 'Em andamento' : 'Pedido entregue';
+                                echo "<br><small><i>Data: " . $dataPedido . "</i></small>";
                                 echo "</h2>";
                                 echo "<div class='pedido-produtos'>";
-    
+                                echo "<div class='idPedido' data-id='$pedido[idPedido]'></div>";
+
                                 if($pedido['cupcakes']){
                                     $cupcakes = explode('|', $pedido['cupcakes']);
 
@@ -193,6 +196,20 @@
     
                                 echo "</div>"; 
                                 echo "<span>Valor Total: R$" . number_format($valorPedido, 2, ',', '.') . "</span>";
+                                
+                                if($pedido['nota']){
+                                    
+                                    echo "<div class='estrelas'>";
+
+                                    for ($i=0; $i < $pedido['nota']; $i++) { 
+                                        echo "<span class='star filled' style='cursor: auto'>&#9733;</span>";
+                                    }
+
+                                    echo "</div>";
+                                } else {
+                                    echo "<small>Não foi avaliado</small>";
+                                }
+
                                 echo "<div class='acompanhar-pedido-footer'>";
                                 
                                 if($pedido['status'] == 'pendente') {

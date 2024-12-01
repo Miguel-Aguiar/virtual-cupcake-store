@@ -161,8 +161,8 @@
 
                         echo "<div class='carrinho-itens'>";
                         
-                        $primeiroItem = reset($carrinho);
-                        $ultimoItem = end($carrinho);
+                        // $primeiroItem = reset($carrinho);
+                        // $ultimoItem = end($carrinho);
 
                         foreach ($carrinho as $item) {
 

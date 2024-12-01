@@ -13,5 +13,13 @@
             return $this->cliente->getEndereco($usuario);
         }
 
+        public function redefinirSenha($email, $telefone){
+            return $this->cliente->redefinirSenha($email, $telefone);
+        }
+
+        public function atualizarSenha($nova_senha, $user_id){
+            $this->cliente->atualizarSenha($nova_senha, $user_id);
+        }
+
     }
 ?>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja de Cupcakes</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="./assets/favicon.png" type="image/x-icon">
+</head>
+<body id="RedefinirSenha">
+
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="home.php"><img src="./assets/logo.png" alt="Logo" width="96px" /></a>
+            </div>
+            <ul class="menu">
+                <li><a href="home.php">Home</a></li>
+                <li><a href="pedidos.php">Pedidos</a></li>
+                <li><a href="combos.php">Combos</a></li>
+                <li><a href="criarCupcake.php">Crie seu Cupcake</a></li>
+                <li><a href="carrinho.php">Carrinho</a></li>
+                <li><a href="contato.php">Contato</a></li>
+            </ul>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <div class="account-area">
+                <div class="cart-icon">
+                    <img src="cart-icon.png" alt="" />
+                </div>
+                <a href="login.html" class="login-link">Criar conta / Login</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="auth-container">    
+        <div class="login-block">
+            <form action="../Controller/verificar_usuario.php" method="POST" class="register-form">
+                <label for="email">Digite seu e-mail:</label>
+                <input type="email" id="email" name="email" required>
+            
+                <label for="telefone">Digite seu número de celular:</label>
+                <input type="text" id="telefone" name="telefone" required>
+            
+                <button type="submit">Redefinir Senha</button>
+            </form>
+        </div>
+    </div>
+    <footer class="footer">
+        <span>&copy; 2024 Loja de Cupcakes. Todos os direitos reservados.</span>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -11,6 +11,20 @@ function validarSenhas(event) {
     return true;
 }
 
+function verificarSenha(){
+    const senha = document.getElementById('password');
+    const submitButton = document.getElementById('submitBtn');
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/;
+    
+    if (!regex.test(senha.value)) {
+        senha.style.borderColor = 'red';
+        submitButton.disabled = true;
+    } else {
+        senha.style.borderColor = 'lightgreen';
+        submitButton.disabled = false;
+    }
+}
+
 function adicionarAoCarrinho(tipo, id, operacao) {
 
     const itemId = id;
@@ -41,7 +55,6 @@ function adicionarAoCarrinho(tipo, id, operacao) {
     })
     .catch(error => {
         console.error('Erro: ', error);
-        // exibirNotificacao('aviso');
     });
 }
 
@@ -246,7 +259,7 @@ function adicionarPersonalizado(){
             if(data.message = "Cupcake já existe no banco de dados."){                
                 adicionarAoCarrinho('cupcake', data.idCupcake);
             }else {
-                // alert(data.message);
+                console.error("Erro ao adicionar cupcake personalizado: " + data.message);
             }
         }
     })
@@ -396,14 +409,15 @@ if (acao === 'novo_pedido') {
 
     setTimeout(() => {
         document.querySelector('.barra-progresso-center').classList.add('fill-from-left');
-    }, 2000);
+    }, 5000);
 
     setTimeout(() => {
         toggleMapa();
-    }, 4000);
+    }, 10000);
     
     pedidoEntregue();
 }
+
 
 switch (acao) {
     case 'registro_feito':
@@ -430,11 +444,16 @@ switch (acao) {
         exibirNotificacao('avaliacao');
         limparUrl();
         break;
-    
+    case 'redefinir_erro':
+        alert('E-mail ou número de celular inválidos.');
+        limparUrl();
+        break;
+    case 'senha_alterada':
+        alert('Senha alterada com sucesso.');
+        limparUrl();
     default:
         break;
 }
-
 
 function toggleMapa(){
     document.querySelector('.barra-progresso-right').classList.add('fill-from-left');
@@ -447,7 +466,34 @@ function toggleMapa(){
 }
 
 function enviarAvaliacao(){
-    location.href = "pedidos.php?acao=pedido_avaliado";
+    const stars = document.querySelectorAll('.star');
+    let nota = 0;
+    stars.forEach(star => {
+        if(star.classList.contains('filled')){
+            nota++;
+        }
+    });
+
+    const idPedido = document.querySelector('div.idPedido').dataset.id;
+    
+    fetch('../Controller/add_nota.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ idPedido, nota })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if(data.success) {
+            location.href = "pedidos.php?acao=pedido_avaliado";
+        }else {
+            alert('Erro');
+        }
+    })
+    .catch(error => {
+        console.error('Erro: ', error);
+    })
 }
 
 function limparUrl() {
@@ -479,6 +525,7 @@ function pedidoEntregue(){
     .then(response => response.json())
     .then(data => {
         if (data.success) {
+
             document.querySelector('.highlight-item h2').innerHTML = 'Pedido chegou';
             
             const pedidoFooter = document.querySelector('.acompanhar-pedido-footer');
@@ -563,7 +610,7 @@ function enderecoPrincipal(){
         if (data.success) {            
             endereco.value = data.endereco;
         } else {
-            // alert('Erro ao recuperar o endereço. ' + data.message);
+            endereco.value = '';
         }
     })
     .catch(error => {

@@ -24,9 +24,6 @@
             </ul>
             <button class="menu-toggle" onclick="toggleMenu()">☰</button>
             <div class="account-area">
-                <div class="cart-icon">
-                    <img src="cart-icon.png" alt="" />
-                </div>
                 <a href="#" class="login-link">Criar conta / Login</a>
             </div>
         </nav>
@@ -45,7 +42,7 @@
 
                 <label for="password">Senha</label>
                 <small style="float: right" class="password-note">A senha necessita: letra minúscula, maiúscula e número.</small>
-                <input type="password" id="password" name="senha" required>
+                <input type="password" id="password" name="senha" required onblur="verificarSenha()">
                 
                 <label for="confirm-password">Confirmar Senha</label>
                 <input type="password" id="confirm-password" name="confirmar-senha" required>
@@ -82,7 +79,7 @@
                 <input type="checkbox" id="nozes" name="restricoes[]" value="Nozes">
                 <label for="nozes">Nozes</label><br>
 
-                <button type="submit" class="register-btn">Cadastre-se</button>
+                <button type="submit" class="register-btn" id="submitBtn">Cadastre-se</button>
             </form>
         </div>
 
@@ -100,6 +97,9 @@
                 <input type="password" id="passwordLogin" name="senha" required>
 
                 <button type="submit" class="register-btn">Entrar</button>
+                <div style="margin-top: 15px;">
+                    <a href="redefinirSenha.html">Esqueceu a senha?</a>
+                </div>
             </form>
         </div>
     </div>
