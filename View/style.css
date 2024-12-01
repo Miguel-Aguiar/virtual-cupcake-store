@@ -612,7 +612,8 @@ span.previsao {
     color: #b7b7b7;
 }
 
-.estrelas span.star {
+.estrelas span.star,
+.estrelas span.estrela {
     font-size: 2.5em;
     cursor: pointer;
     color: transparent;
@@ -622,7 +623,8 @@ span.previsao {
     user-select: none;
 }
 
-.estrelas span.star.filled {
+.estrelas span.star.filled,
+.estrelas span.estrela.filled {
     color: #FFD700;
 }
 
